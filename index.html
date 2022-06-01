@@ -32,70 +32,6 @@
     <meta property="og:image:type" content="image/png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@vivacinemas" />
-    <script type="application/ld+json" class="yoast-schema-graph">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "Organization",
-            "@id": "https://vivacinemas.com/#organization",
-            "name": "VIVA Cinemas",
-            "url": "https://vivacinemas.com/",
-            "sameAs": [
-              "https://web.facebook.com/vivacinemasnigeria/?_rdc=1&amp;amp;amp;amp;amp;amp;amp;amp;_rdr",
-              "https://www.instagram.com/vivacinemasnigeria/",
-              "https://www.youtube.com/channel/UCLYNs73Q3A8XDU5dmNM7iKA",
-              "https://twitter.com/vivacinemas"
-            ],
-            "logo": {
-              "@type": "ImageObject",
-              "@id": "https://vivacinemas.com/#logo",
-              "inLanguage": "en-US",
-              "url": "https://vivacinemas.com/wp-content/uploads/2019/02/VIVA-Headerlogo.png",
-              "contentUrl": "https://vivacinemas.com/wp-content/uploads/2019/02/VIVA-Headerlogo.png",
-              "width": 250,
-              "height": 140,
-              "caption": "VIVA Cinemas"
-            },
-            "image": { "@id": "https://vivacinemas.com/#logo" }
-          },
-          {
-            "@type": "WebSite",
-            "@id": "https://vivacinemas.com/#website",
-            "url": "https://vivacinemas.com/",
-            "name": "VIVA Cinemas",
-            "description": "Unforgettable VIVA Experience",
-            "publisher": { "@id": "https://vivacinemas.com/#organization" },
-            "potentialAction": [
-              {
-                "@type": "SearchAction",
-                "target": { "@type": "EntryPoint", "urlTemplate": "https://vivacinemas.com/?s={search_term_string}" },
-                "query-input": "required name=search_term_string"
-              }
-            ],
-            "inLanguage": "en-US"
-          },
-          {
-            "@type": "WebPage",
-            "@id": "https://vivacinemas.com/#webpage",
-            "url": "https://vivacinemas.com/",
-            "name": "Buy Online - VIVA Cinemas",
-            "isPartOf": { "@id": "https://vivacinemas.com/#website" },
-            "about": { "@id": "https://vivacinemas.com/#organization" },
-            "datePublished": "2019-02-20T12:44:19+00:00",
-            "dateModified": "2022-05-15T16:04:32+00:00",
-            "breadcrumb": { "@id": "https://vivacinemas.com/#breadcrumb" },
-            "inLanguage": "en-US",
-            "potentialAction": [{ "@type": "ReadAction", "target": ["https://vivacinemas.com/"] }]
-          },
-          {
-            "@type": "BreadcrumbList",
-            "@id": "https://vivacinemas.com/#breadcrumb",
-            "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home" }]
-          }
-        ]
-      }
-    </script>
     <meta name="msvalidate.01" content="E4A5BF76979EC8F8AE448E5DA15F65F7" />
     <meta name="google-site-verification" content="0icti4IoLw5ommTXj-Jd4OlFj7a5hJ6Z4CcxoEKMbFk" />
     <meta name="yandex-verification" content="6786c4557e349f17" />
@@ -123,200 +59,7 @@
       type="text/javascript"
       async
     ></script>
-    <script data-cfasync="false" data-wpfc-render="false" type="text/javascript">
-      var mi_version = "8.5.0";
-      var mi_track_user = true;
-      var mi_no_track_reason = "";
 
-      var disableStrs = ["ga-disable-UA-138685727-1"];
-
-      /* Function to detect opted out users */
-      function __gtagTrackerIsOptedOut() {
-        for (var index = 0; index < disableStrs.length; index++) {
-          if (document.cookie.indexOf(disableStrs[index] + "=true") > -1) {
-            return true;
-          }
-        }
-
-        return false;
-      }
-
-      /* Disable tracking if the opt-out cookie exists. */
-      if (__gtagTrackerIsOptedOut()) {
-        for (var index = 0; index < disableStrs.length; index++) {
-          window[disableStrs[index]] = true;
-        }
-      }
-
-      /* Opt-out function */
-      function __gtagTrackerOptout() {
-        for (var index = 0; index < disableStrs.length; index++) {
-          document.cookie = disableStrs[index] + "=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/";
-          window[disableStrs[index]] = true;
-        }
-      }
-
-      if ("undefined" === typeof gaOptout) {
-        function gaOptout() {
-          __gtagTrackerOptout();
-        }
-      }
-      window.dataLayer = window.dataLayer || [];
-
-      window.MonsterInsightsDualTracker = {
-        helpers: {},
-        trackers: {},
-      };
-      if (mi_track_user) {
-        function __gtagDataLayer() {
-          dataLayer.push(arguments);
-        }
-
-        function __gtagTracker(type, name, parameters) {
-          if (!parameters) {
-            parameters = {};
-          }
-
-          if (parameters.send_to) {
-            __gtagDataLayer.apply(null, arguments);
-            return;
-          }
-
-          if (type === "event") {
-            parameters.send_to = monsterinsights_frontend.ua;
-            __gtagDataLayer(type, name, parameters);
-          } else {
-            __gtagDataLayer.apply(null, arguments);
-          }
-        }
-        __gtagTracker("js", new Date());
-        __gtagTracker("set", {
-          "developer_id.dZGIzZG": true,
-        });
-        __gtagTracker("config", "UA-138685727-1", { forceSSL: "true" });
-        window.gtag = __gtagTracker;
-        (function () {
-          /* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
-          /* ga and __gaTracker compatibility shim. */
-          var noopfn = function () {
-            return null;
-          };
-          var newtracker = function () {
-            return new Tracker();
-          };
-          var Tracker = function () {
-            return null;
-          };
-          var p = Tracker.prototype;
-          p.get = noopfn;
-          p.set = noopfn;
-          p.send = function () {
-            var args = Array.prototype.slice.call(arguments);
-            args.unshift("send");
-            __gaTracker.apply(null, args);
-          };
-          var __gaTracker = function () {
-            var len = arguments.length;
-            if (len === 0) {
-              return;
-            }
-            var f = arguments[len - 1];
-            if (typeof f !== "object" || f === null || typeof f.hitCallback !== "function") {
-              if ("send" === arguments[0]) {
-                var hitConverted,
-                  hitObject = false,
-                  action;
-                if ("event" === arguments[1]) {
-                  if ("undefined" !== typeof arguments[3]) {
-                    hitObject = {
-                      eventAction: arguments[3],
-                      eventCategory: arguments[2],
-                      eventLabel: arguments[4],
-                      value: arguments[5] ? arguments[5] : 1,
-                    };
-                  }
-                }
-                if ("pageview" === arguments[1]) {
-                  if ("undefined" !== typeof arguments[2]) {
-                    hitObject = {
-                      eventAction: "page_view",
-                      page_path: arguments[2],
-                    };
-                  }
-                }
-                if (typeof arguments[2] === "object") {
-                  hitObject = arguments[2];
-                }
-                if (typeof arguments[5] === "object") {
-                  Object.assign(hitObject, arguments[5]);
-                }
-                if ("undefined" !== typeof arguments[1].hitType) {
-                  hitObject = arguments[1];
-                  if ("pageview" === hitObject.hitType) {
-                    hitObject.eventAction = "page_view";
-                  }
-                }
-                if (hitObject) {
-                  action = "timing" === arguments[1].hitType ? "timing_complete" : hitObject.eventAction;
-                  hitConverted = mapArgs(hitObject);
-                  __gtagTracker("event", action, hitConverted);
-                }
-              }
-              return;
-            }
-
-            function mapArgs(args) {
-              var arg,
-                hit = {};
-              var gaMap = {
-                eventCategory: "event_category",
-                eventAction: "event_action",
-                eventLabel: "event_label",
-                eventValue: "event_value",
-                nonInteraction: "non_interaction",
-                timingCategory: "event_category",
-                timingVar: "name",
-                timingValue: "value",
-                timingLabel: "event_label",
-                page: "page_path",
-                location: "page_location",
-                title: "page_title",
-              };
-              for (arg in args) {
-                if (!(!args.hasOwnProperty(arg) || !gaMap.hasOwnProperty(arg))) {
-                  hit[gaMap[arg]] = args[arg];
-                } else {
-                  hit[arg] = args[arg];
-                }
-              }
-              return hit;
-            }
-
-            try {
-              f.hitCallback();
-            } catch (ex) {}
-          };
-          __gaTracker.create = newtracker;
-          __gaTracker.getByName = newtracker;
-          __gaTracker.getAll = function () {
-            return [];
-          };
-          __gaTracker.remove = noopfn;
-          __gaTracker.loaded = true;
-          window["__gaTracker"] = __gaTracker;
-        })();
-      } else {
-        console.log("");
-        (function () {
-          function __gtagTracker() {
-            return null;
-          }
-          window["__gtagTracker"] = __gtagTracker;
-          window["gtag"] = __gtagTracker;
-        })();
-      }
-    </script>
-    <!-- / Google Analytics by MonsterInsights -->
     <link
       rel="stylesheet"
       id="wp-block-library-css"
@@ -1368,44 +1111,11 @@
   <body
     class="home page-template page-template-brizy-blank-template page-template-brizy-blank-template-php page page-id-2349 group-blog masthead-fixed full-width grid"
   >
-    <div class="movie-search">
-      <form role="search" method="get" id="searchform" action="https://vivacinemas.com/">
-        <div>
-          <input type="text" value="" name="s" id="search" placeholder="Search movies" />
-          <input type="submit" id="searchsubmit" class="btn btn-default" value="Search" />
-          <input type="hidden" name="post_type" value="movie" />
-        </div>
-      </form>
-    </div>
-
     <!-- Navigation -->
     <div class="navbar" role="navigation">
-      <!-- Heading -->
-      <div class="heading">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="search">
-                <a href="#">
-                  <i class="fa fa-search"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div class="container">
         <div class="navbar-header">
-          <a href="https://vivacinemas.com/" title="VIVA Cinemas" class="logo">
-            <img
-              src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3C/svg%3E"
-              alt="VIVA Cinemas"
-              data-lazy-src="//vivacinemas.com/wp-content/uploads/2019/02/VIVA-Headerlogo.png"
-            /><noscript
-              ><img src="//vivacinemas.com/wp-content/uploads/2019/02/VIVA-Headerlogo.png" alt="VIVA Cinemas"
-            /></noscript>
-          </a>
+          <a href="https://vivacinemas.com/" title="VIVA Cinemas" class="logo"> </a>
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only"></span>
             <span class="icon-bar top-bar"></span>
@@ -1419,66 +1129,6 @@
               class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-5742 dropdown"
             >
               <a title="Home" href="#" class="dropdown-toggle" aria-haspopup="false">Home</a>
-              <ul role="menu" class="dropdown-menu">
-                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2700">
-                  <a title="About Us" href="https://vivacinemas.com/about-us/">About Us</a>
-                </li>
-                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2417">
-                  <a title="Contact us" href="https://vivacinemas.com/contact-us/"
-                    ><span class="glyphicon"></span>&nbsp;Contact us</a
-                  >
-                </li>
-              </ul>
-            </li>
-            <li
-              class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-2389 dropdown"
-            >
-              <a
-                title="Prices"
-                href="https://vivacinemas.com/ticket-price/"
-                class="dropdown-toggle"
-                aria-haspopup="false"
-                ><span class="glyphicon"></span>&nbsp;Prices</a
-              >
-              <ul role="menu" class="dropdown-menu">
-                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2466">
-                  <a title="Ticket Price" href="https://vivacinemas.com/ticket-price/">Ticket Price</a>
-                </li>
-                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2390">
-                  <a title="Rentals" href="https://vivacinemas.com/?page_id=853"
-                    ><span class="glyphicon"></span>&nbsp;Rentals</a
-                  >
-                </li>
-                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2391">
-                  <a title="Group Booking" href="https://vivacinemas.com/group-booking/"
-                    ><span class="glyphicon"></span>&nbsp;Group Booking</a
-                  >
-                </li>
-              </ul>
-            </li>
-            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2398">
-              <a title="Film Food" href="https://vivacinemas.com/film-food/"
-                ><span class="glyphicon"></span>&nbsp;Film Food</a
-              >
-            </li>
-            <li
-              class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-2397 dropdown"
-            >
-              <a title="Jobs" href="https://vivacinemas.com/jobs/" class="dropdown-toggle" aria-haspopup="false"
-                ><span class="glyphicon"></span>&nbsp;Jobs</a
-              >
-              <ul role="menu" class="dropdown-menu">
-                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2399">
-                  <a title="Events" href="https://vivacinemas.com/events/"
-                    ><span class="glyphicon"></span>&nbsp;Events</a
-                  >
-                </li>
-              </ul>
-            </li>
-            <li
-              class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-2349 current_page_item menu-item-2430 active"
-            >
-              <a title="Buy Online" href="https://vivacinemas.com/"><span class="glyphicon"></span>&nbsp;Buy Online</a>
             </li>
           </ul>
         </div>
@@ -1495,12 +1145,7 @@
         alt="Scroll down"
         class="scroll"
         data-lazy-src="https://vivacinemas.com/wp-content/themes/kreglex-cinema-le/images/scroll-arrow.svg"
-      /><noscript
-        ><img
-          src="https://vivacinemas.com/wp-content/themes/kreglex-cinema-le/images/scroll-arrow.svg"
-          alt="Scroll down"
-          class="scroll"
-      /></noscript>
+      />
       <div class="container">
         <div class="row blurb">
           <div class="col-md-9">
@@ -1647,23 +1292,11 @@
             </div>
             <h6>About VIVA Cinema</h6>
             <div class="menu-footer-2-container">
-              <ul id="menu-footer-2" class="menu">
-                <li id="menu-item-2394" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2394">
-                  <a title="						" href="https://vivacinemas.com/about-us/">About Us</a>
-                </li>
-                <li id="menu-item-2424" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2424">
-                  <a title="						" href="https://vivacinemas.com/jobs/">Jobs</a>
-                </li>
-                <li id="menu-item-2421" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2421">
-                  <a title="						" href="https://vivacinemas.com/contact-us/">Contact us</a>
-                </li>
-                <li id="menu-item-4797" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4797">
-                  <a href="https://vivacinemas.com/privacy-policy/">Privacy Policy</a>
-                </li>
-                <li id="menu-item-4803" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4803">
-                  <a href="https://vivacinemas.com/terms-conditions/">Terms &#038; Conditions</a>
-                </li>
-              </ul>
+              <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima quo atque sunt quidem ex ratione. Culpa
+                explicabo quibusdam dicta soluta incidunt repellendus minus itaque ut tenetur, at voluptatem pariatur
+                tempora.
+              </p>
             </div>
           </div>
           <div class="col-sm-3">
@@ -1685,87 +1318,7 @@
 
             <div class="textwidget">
               <ul>
-                <li style="list-style-type: none">
-                  <ul>
-                    <li>
-                      <a href="https://www.instagram.com/vivacinemasnigeria/"
-                        ><img
-                          loading="lazy"
-                          class="alignnone size-medium wp-image-2550"
-                          src="https://vivacinemas.com/wp-content/uploads/2019/03/social-instagram-new-circle-512-300x300.png"
-                          alt=""
-                          width="16"
-                          height="16"
-                          srcset="
-                            https://vivacinemas.com/wp-content/uploads/2019/03/social-instagram-new-circle-512-300x300.png 300w,
-                            https://vivacinemas.com/wp-content/uploads/2019/03/social-instagram-new-circle-512-150x150.png 150w,
-                            https://vivacinemas.com/wp-content/uploads/2019/03/social-instagram-new-circle-512.png         512w
-                          "
-                          sizes="(max-width: 16px) 100vw, 16px"
-                        />
-                        Instagram</a
-                      >
-                    </li>
-                    <li>
-                      <a href="https://twitter.com/vivacinemas"
-                        ><img
-                          loading="lazy"
-                          class="alignnone size-medium wp-image-2551"
-                          src="https://vivacinemas.com/wp-content/uploads/2019/03/twitter-512-300x300.png"
-                          alt=""
-                          width="16"
-                          height="16"
-                          srcset="
-                            https://vivacinemas.com/wp-content/uploads/2019/03/twitter-512-300x300.png 300w,
-                            https://vivacinemas.com/wp-content/uploads/2019/03/twitter-512-150x150.png 150w,
-                            https://vivacinemas.com/wp-content/uploads/2019/03/twitter-512.png         512w
-                          "
-                          sizes="(max-width: 16px) 100vw, 16px"
-                        />
-                        Twitter</a
-                      >
-                    </li>
-                    <li>
-                      <a href="https://web.facebook.com/vivacinemasnigeria/?_rdc=1&amp;_rdr"
-                        ><img
-                          loading="lazy"
-                          class="alignnone size-medium wp-image-2552"
-                          src="https://vivacinemas.com/wp-content/uploads/2019/03/facebook_circle-512-300x300.png"
-                          alt=""
-                          width="16"
-                          height="16"
-                          srcset="
-                            https://vivacinemas.com/wp-content/uploads/2019/03/facebook_circle-512-300x300.png 300w,
-                            https://vivacinemas.com/wp-content/uploads/2019/03/facebook_circle-512-150x150.png 150w,
-                            https://vivacinemas.com/wp-content/uploads/2019/03/facebook_circle-512.png         512w
-                          "
-                          sizes="(max-width: 16px) 100vw, 16px"
-                        />
-                        Facebook</a
-                      >
-                    </li>
-                    <li>
-                      <a href="https://www.youtube.com/channel/UCLYNs73Q3A8XDU5dmNM7iKA"
-                        ><img
-                          loading="lazy"
-                          class="alignnone size-medium wp-image-2553"
-                          src="https://vivacinemas.com/wp-content/uploads/2019/03/youtube-4-512-300x300.gif"
-                          alt=""
-                          width="16"
-                          height="16"
-                          srcset="
-                            https://vivacinemas.com/wp-content/uploads/2019/03/youtube-4-512-300x300.gif 300w,
-                            https://vivacinemas.com/wp-content/uploads/2019/03/youtube-4-512-150x150.gif 150w
-                          "
-                          sizes="(max-width: 16px) 100vw, 16px"
-                        />
-                        YouTube</a
-                      >
-                    </li>
-                    <li><strong>Marketing/Advert</strong></li>
-                    <li><strong>018880238</strong></li>
-                  </ul>
-                </li>
+                <li style="list-style-type: none">Social Links</li>
               </ul>
             </div>
           </div>
@@ -1787,145 +1340,5 @@
         </li>
       </ul>
     </div>
-    <script
-      src="https://vivacinemas.com/wp-content/plugins/theatre/functions/../js/main.js?ver=0.18.3"
-      id="wp_theatre_js-js"
-    ></script>
-    <script
-      src="https://vivacinemas.com/wp-includes/js/jquery/ui/core.min.js?ver=1.13.1"
-      id="jquery-ui-core-js"
-    ></script>
-    <script
-      src="https://vivacinemas.com/wp-includes/js/jquery/ui/effect.min.js?ver=1.13.1"
-      id="jquery-effects-core-js"
-    ></script>
-    <script
-      src="https://vivacinemas.com/wp-includes/js/jquery/ui/effect-shake.min.js?ver=1.13.1"
-      id="jquery-effects-shake-js"
-    ></script>
-    <script
-      src="https://vivacinemas.com/wp-content/themes/kreglex-cinema-le/js/bootstrap.min.js?ver=3.3.6"
-      id="bootstrap-js"
-    ></script>
-    <script
-      src="https://vivacinemas.com/wp-content/themes/kreglex-cinema-le/js/headhesive.min.js?ver=1.2.4"
-      id="specto_headhesive-js"
-    ></script>
-    <script
-      src="https://vivacinemas.com/wp-content/themes/kreglex-cinema-le/js/matchHeight.min.js?ver=0.7.0"
-      id="specto_matchHeight-js"
-    ></script>
-    <script
-      src="https://vivacinemas.com/wp-content/themes/kreglex-cinema-le/js/slick.min.js?ver=1.6.0"
-      id="specto_slick-slider-js"
-    ></script>
-    <script
-      src="https://vivacinemas.com/wp-content/themes/kreglex-cinema-le/js/venobox.min.js?ver=1.6.0"
-      id="specto_venobox-js"
-    ></script>
-    <script
-      src="https://vivacinemas.com/wp-content/themes/kreglex-cinema-le/js/doubletaptogo.js?ver=3.0.2"
-      id="double-tap-js-js"
-    ></script>
-    <script
-      src="https://vivacinemas.com/wp-includes/js/jquery/ui/accordion.min.js?ver=1.13.1"
-      id="jquery-ui-accordion-js"
-    ></script>
-    <script
-      src="https://vivacinemas.com/wp-includes/js/jquery/ui/tabs.min.js?ver=1.13.1"
-      id="jquery-ui-tabs-js"
-    ></script>
-    <script
-      src="https://vivacinemas.com/wp-content/themes/kreglex-cinema-le/js/custom.js?ver=1.0"
-      id="specto_custom-js-js"
-    ></script>
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js?ver=1.0" id="html5-js"></script>
-    <![endif]-->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js?ver=1.0" id="respond-js"></script>
-    <![endif]-->
-    <script
-      src="https://vivacinemas.com/wp-content/plugins/unyson/framework/extensions/shortcodes/shortcodes/section/static/js/core.js?ver=6.0"
-      id="fw-shortcode-section-formstone-core-js"
-    ></script>
-    <script
-      src="https://vivacinemas.com/wp-content/plugins/unyson/framework/extensions/shortcodes/shortcodes/section/static/js/transition.js?ver=6.0"
-      id="fw-shortcode-section-formstone-transition-js"
-    ></script>
-    <script
-      src="https://vivacinemas.com/wp-content/plugins/unyson/framework/extensions/shortcodes/shortcodes/section/static/js/background.js?ver=6.0"
-      id="fw-shortcode-section-formstone-background-js"
-    ></script>
-    <script
-      src="https://vivacinemas.com/wp-content/plugins/unyson/framework/extensions/shortcodes/shortcodes/section/static/js/background.init.js?ver=6.0"
-      id="fw-shortcode-section-js"
-    ></script>
-    <script>
-      window.lazyLoadOptions = {
-        elements_selector: "img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",
-        data_src: "lazy-src",
-        data_srcset: "lazy-srcset",
-        data_sizes: "lazy-sizes",
-        skip_invisible: false,
-        class_loading: "lazyloading",
-        class_loaded: "lazyloaded",
-        threshold: 300,
-        callback_load: function (element) {
-          if (element.tagName === "IFRAME" && element.dataset.rocketLazyload == "fitvidscompatible") {
-            if (element.classList.contains("lazyloaded")) {
-              if (typeof window.jQuery != "undefined") {
-                if (jQuery.fn.fitVids) {
-                  jQuery(element).parent().fitVids();
-                }
-              }
-            }
-          }
-        },
-      };
-      window.addEventListener(
-        "LazyLoad::Initialized",
-        function (e) {
-          var lazyLoadInstance = e.detail.instance;
-
-          if (window.MutationObserver) {
-            var observer = new MutationObserver(function (mutations) {
-              mutations.forEach(function (mutation) {
-                for (i = 0; i < mutation.addedNodes.length; i++) {
-                  if (typeof mutation.addedNodes[i].getElementsByTagName !== "function") {
-                    return;
-                  }
-
-                  if (typeof mutation.addedNodes[i].getElementsByClassName !== "function") {
-                    return;
-                  }
-
-                  imgs = mutation.addedNodes[i].getElementsByTagName("img");
-                  iframes = mutation.addedNodes[i].getElementsByTagName("iframe");
-                  rocket_lazy = mutation.addedNodes[i].getElementsByClassName("rocket-lazyload");
-
-                  if (0 === imgs.length && 0 === iframes.length && 0 === rocket_lazy.length) {
-                    return;
-                  }
-
-                  lazyLoadInstance.update();
-                }
-              });
-            });
-
-            var b = document.getElementsByTagName("body")[0];
-            var config = { childList: true, subtree: true };
-
-            observer.observe(b, config);
-          }
-        },
-        false
-      );
-    </script>
-    <script
-      data-no-minify="1"
-      async
-      src="https://vivacinemas.com/wp-content/plugins/wp-rocket/assets/js/lazyload/11.0.6/lazyload.min.js"
-    ></script>
   </body>
 </html>
