@@ -38,7 +38,9 @@ export const FormElement = ({
 }) => {
   return (
     <div className={`form-group ${className || ""}`}>
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name}>
+        <small>{label}</small>
+      </label>
       <div className={type}>
         <input
           type={type === undefined ? "input" : type === "switch" ? "checkbox" : type}

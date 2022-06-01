@@ -11,9 +11,9 @@ export default function Video() {
         xmlns="http://www.w3.org/2000/svg"
         aria-labelledby="videoIconTitle"
         stroke="#000000"
-        stroke-width="2"
-        stroke-linecap="square"
-        stroke-linejoin="miter"
+        strokeWidth="2"
+        strokeLinecap="square"
+        strokeLinejoin="miter"
         fill="none"
       >
         <title id="videoIconTitle">Video</title> <polygon points="18 12 9 16.9 9 7" /> <circle cx="12" cy="12" r="10" />{" "}

@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Section from "../components/Section";
 import { Col, Row, Content, Aside, Ul, Li, Container, Button } from "../components/Elements";
 import BookingIcon from "../components/Icons/Booking";
 import Movie from "../components/Icons/Video";
-import MovieCard from "../components/MovieCard";
-import Add from "../components/Icons/Add";
+import TabMovies from "../components/admin/TabMovies";
+import TabBookings from "../components/admin/TabBookings";
 
 export default function Admin() {
+  const [tab, toggleTab] = useState(0);
   return (
     <main className="dashboard" style={{ backgroundImage: "url(/img/p3.png)", minHeight: "100vh" }}>
       <Navbar />
@@ -18,13 +19,13 @@ export default function Admin() {
               <Aside>
                 <Ul className="css-1ta9ch5">
                   <Li className="css-bjbssn">
-                    <div>
+                    <div onClick={() => toggleTab(0)}>
                       <Movie />
                       <span>Movies</span>
                     </div>
                   </Li>
                   <Li>
-                    <div>
+                    <div onClick={() => toggleTab(1)}>
                       <BookingIcon />
                       <span>Bookings</span>
                     </div>
@@ -34,25 +35,8 @@ export default function Admin() {
             </Col>
             <Col md={10}>
               <Section className="card px-4">
-                <Container>
-                  <Content id="id">
-                    <h5>Showing a list of uploaded Movies</h5>
-                    <hr />
-                    <Row>
-                      <Col md={3} sm={6}>
-                        <MovieCard />
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col className="mt-4 d-flex justify-content-end" md="12">
-                        <Button variant="warning">
-                          <Add /> <span> New Movie</span>
-                        </Button>
-                      </Col>
-                    </Row>
-                  </Content>
-                  <Content>yes</Content>
-                </Container>
+                {tab === 0 && <TabMovies />}
+                {tab === 1 && <TabBookings />}
               </Section>
             </Col>
           </Row>
