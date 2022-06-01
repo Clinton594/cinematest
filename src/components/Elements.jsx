@@ -1,8 +1,6 @@
-import React, { FormEventHandler, MouseEventHandler } from "react";
-import { IFieldSet, IFormElements } from "../types";
 import Spinner from "./Spinner";
 
-export default function Fieldset({ title, children, value, isLoading }: IFieldSet) {
+export default function Fieldset({ title, children, value, isLoading }) {
   return (
     <fieldset>
       <legend>
@@ -13,37 +11,21 @@ export default function Fieldset({ title, children, value, isLoading }: IFieldSe
   );
 }
 
-export const Row = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
+export const Row = ({ children }) => {
   return <div className="row">{children}</div>;
 };
 
-export const Col = ({
-  sm,
-  md,
-  lg,
-  children,
-}: {
-  children: JSX.Element | JSX.Element[];
-  sm?: string;
-  md?: string;
-  lg?: string;
-}) => {
+export const Col = ({ sm, md, lg, children }) => {
   const val = sm || md || lg;
   const cls = sm !== undefined ? "sm" : md !== undefined ? "md" : "lg";
   return <div className={`col-${cls}-${val}`}>{children}</div>;
 };
 
-export const Card = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
+export const Card = ({ children }) => {
   return <div className="card">{children}</div>;
 };
 
-export const Form = ({
-  children,
-  onSubmit,
-}: {
-  onSubmit?: FormEventHandler;
-  children: JSX.Element | JSX.Element[];
-}) => {
+export const Form = ({ children, onSubmit }) => {
   return (
     <form onSubmit={onSubmit} className="d-flex justify-content-between align-items-end w-100 p-4">
       {children}
@@ -64,7 +46,7 @@ export const FormElement = ({
   required,
   min,
   step,
-}: IFormElements) => {
+}) => {
   return (
     <div className={`form-group ${className || ""}`}>
       <label htmlFor={name}>{label}</label>
@@ -93,25 +75,11 @@ export const FormElement = ({
   );
 };
 
-export const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
+export const Container = ({ children }) => {
   return <div className="container">{children}</div>;
 };
 
-export const Button = ({
-  children,
-  disabled,
-  variant,
-  type,
-  onClick,
-  className,
-}: {
-  children: JSX.Element | JSX.Element[];
-  disabled?: boolean;
-  variant: string;
-  className?: string;
-  type: "button" | "submit" | "reset" | undefined;
-  onClick?: MouseEventHandler;
-}) => {
+export const Button = ({ children, disabled, variant, type, onClick, className }) => {
   className = typeof className === "undefined" ? "mb-3" : className;
   return (
     <button
