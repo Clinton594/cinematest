@@ -3,6 +3,7 @@ const route = {
   dashboard: "/dashboard",
   movies: "/movies",
   login: "/login",
+  notfound: "*",
 };
 
 export default route;

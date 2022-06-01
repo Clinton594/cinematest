@@ -1,24 +1,13 @@
-import Spinner from "./Spinner";
-
-export default function Fieldset({ title, children, value, isLoading }) {
-  return (
-    <fieldset>
-      <legend>
-        {title} : {isLoading ? <Spinner size="sm" animation="grow" variant="primary" /> : <strong>{value}</strong>}
-      </legend>
-      <div>{children}</div>
-    </fieldset>
-  );
-}
-
 export const Row = ({ children }) => {
   return <div className="row">{children}</div>;
 };
 
-export const Col = ({ sm, md, lg, children }) => {
-  const val = sm || md || lg;
-  const cls = sm !== undefined ? "sm" : md !== undefined ? "md" : "lg";
-  return <div className={`col-${cls}-${val}`}>{children}</div>;
+export const Col = ({ sm, md, lg, children, className }) => {
+  const colSm = (sm && `col-sm-${sm}`) || "";
+  const colMd = (md && `col-md-${md}`) || "";
+  const colLg = (lg && `col-lg-${lg}`) || "";
+  className = className || "";
+  return <div className={`${colSm} ${colMd} ${colLg} ${className}`}>{children}</div>;
 };
 
 export const Card = ({ children }) => {
@@ -77,6 +66,19 @@ export const FormElement = ({
 
 export const Container = ({ children }) => {
   return <div className="container">{children}</div>;
+};
+export const Aside = ({ children, className }) => {
+  return <aside className={className && className}>{children}</aside>;
+};
+export const Ul = ({ children, className }) => {
+  return <ul className={className && className}>{children}</ul>;
+};
+export const Li = ({ children, className }) => {
+  return <li className={className && className}>{children}</li>;
+};
+
+export const Content = ({ children, className }) => {
+  return <div className={`${className} content`}>{children}</div>;
 };
 
 export const Button = ({ children, disabled, variant, type, onClick, className }) => {

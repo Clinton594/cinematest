@@ -4,7 +4,7 @@ import { Button, Form } from "../components/Elements";
 
 export default function Login() {
   return (
-    <main className="bg-dark login" style={{ backgroundImage: "url(/img/p3.png)", minHeight: "100vh" }}>
+    <main className="login" style={{ backgroundImage: "url(/img/p3.png)", minHeight: "100vh" }}>
       <Navbar />
       <div className="row">
         <div className="col-md-1 col-lg-8 d-none d-lg-block">
@@ -15,6 +15,7 @@ export default function Login() {
             src="img/authentication-rafiki.png"
             alt=""
           />
+          <div className="vr"></div>
         </div>
         <div className="col-md-8 col-lg-4 offset-md-2 offset-lg-0">
           <div className="login-containter">

@@ -1,8 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import locations from "../constants/locations";
-import { Button } from "../components/Elements";
 
 export default function Home() {
   return (
