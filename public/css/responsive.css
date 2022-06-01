@@ -1,0 +1,36 @@
+@media screen and (max-width: 580px) {
+  .rocket-lazyload::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #01070d96;
+  }
+  div.row.blurb {
+    padding-top: unset;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  header.navbar {
+    position: -webkit-relative;
+    position: relative;
+  }
+  .login-containter {
+    height: 70vh;
+  }
+}
+@media screen and (min-width: 769px) {
+  header.navbar {
+    position: fixed;
+    position: -webkit-fixed;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+  .login-containter {
+    height: 100vh;
+  }
+}

@@ -25,9 +25,9 @@ export const Card = ({ children }) => {
   return <div className="card">{children}</div>;
 };
 
-export const Form = ({ children, onSubmit }) => {
+export const Form = ({ children, onSubmit, className }) => {
   return (
-    <form onSubmit={onSubmit} className="d-flex justify-content-between align-items-end w-100 p-4">
+    <form onSubmit={onSubmit} className={`${className} p-4`}>
       {children}
     </form>
   );
@@ -85,7 +85,7 @@ export const Button = ({ children, disabled, variant, type, onClick, className }
     <button
       onClick={onClick}
       type={type}
-      className={`btn btn-${variant} d-flex ${className}`}
+      className={`justify-content-center btn btn-${variant} d-flex ${className}`}
       disabled={disabled === undefined ? false : disabled}
     >
       {children}

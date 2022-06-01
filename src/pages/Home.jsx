@@ -33,7 +33,7 @@ export default function Home() {
                 locations.map((location) => (
                   <div key={location.name} className="col d-flex justify-content-center">
                     <Link to={`/movies/${location.name.toLowerCase()}`}>
-                      <Button variant="danger" className="px-4">
+                      <Button variant="danger" className="px-4 my-2">
                         {location.name}
                       </Button>
                     </Link>
@@ -47,7 +47,7 @@ export default function Home() {
       <div className="container">
         <div className="row">
           <div className="col-sm-12 justify-content-center">
-            <img src="/img/batman-tickets.png" alt="" />
+            <img width="100%" src="/img/batman-tickets.png" alt="" />
           </div>
         </div>
       </div>
@@ -57,7 +57,7 @@ export default function Home() {
           <div className="row">
             {locations.length > 0 &&
               locations.map((location) => (
-                <div className="col-md-4">
+                <div key={location.name} className="col-md-4">
                   <h4>{location.name}</h4>
                   <p className="light-text">{location.address}</p>
                 </div>

@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
+import $ from "jquery";
+import { Link } from "react-router-dom";
+import route from "../constants/routes";
 
 export default function Navbar() {
+  useEffect(() => {
+    $(window).on("scroll", function () {
+      const scroll = $(window).scrollTop() || 0;
+      if (scroll && scroll >= 50) {
+        $("header").addClass("sticky");
+      } else {
+        $("header").removeClass("sticky");
+      }
+    });
+  }, []);
   return (
     <header className="navbar" role="navigation">
       <div className="container">
         <nav className="navbar navbar-expand-lg w-100">
-          <a className="navbar-brand" href="!#">
+          <Link className="navbar-brand" to={route.home}>
             <img className="mt-2" width="250" src="/img/logo.png" alt="" />
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -23,14 +36,14 @@ export default function Navbar() {
           <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul className="navbar-nav">
               <li className="nav-item active">
-                <a className="nav-link" href="!#">
+                <Link className="nav-link" to={route.movies}>
                   Movies
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="!#">
+                <Link className="nav-link" to={route.login}>
                   Login
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
