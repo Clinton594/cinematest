@@ -63,6 +63,10 @@ nav {
   color: red;
   border-bottom: solid 4px red;
 }
+footer p,
+footer h4 {
+  font-size: smaller;
+}
 .row.blurb {
   min-height: 200px;
   display: flex;
@@ -392,4 +396,8 @@ aside > ul > li > div > span {
   left: unset;
   height: auto;
   transform: translateY(0px);
+}
+
+.toast.show {
+  z-index: 1050;
 }

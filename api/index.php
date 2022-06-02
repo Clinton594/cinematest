@@ -3,26 +3,35 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
 require_once("controllers/Database.php");
+require_once("controllers/Auth.php");
 require_once("database/schema.php");
 
 
 $Database = new Database;
 $db = $Database->connect();
-$uri = $Database->getURIdata();
+$api = $Database->getURIdata();
 
-$post = object(array_merge($_POST, $_GET));
+$post = isJson(file_get_contents('php://input'));
+if (empty($post)) {
+  $post = object($_POST);
+}
+
 $response = new stdClass;
 
-switch ($post->case) {
+switch ($api->route) {
   case 'run-table':
-    foreach ($tableSchema as $key => $query) {
-      $db->query($query) or die($db->error . "-- key($key)");
-    }
-    $response->status = true;
-    $response->message = "Successfuly Created Tables";
+    $response = $Database->run_table($tableSchema);
+    break;
+  case 'meta-data':
+    $response = $Database->getMetadata();
+    break;
+  case 'login':
+    $auth = new Auth($Database);
+    $response = $auth->login($post);
     break;
   default:
-    # code...
+    $response->status = false;
+    $response->message = "INVALID_HTTP_REQUEST";
     break;
 }
 

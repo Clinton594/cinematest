@@ -6,9 +6,9 @@ $tableSchema = [
     primary key (id),
     name varchar(50) default null,
     email varchar(50) default null unique,
-    password varchar(50)  not null,
+    password varchar(250)  not null,
     status tinyint default 0,
-    token varchar(50) null,
+    token varchar(250) null,
     date DATETIME NULL DEFAULT CURRENT_TIMESTAMP
   )",
   "movie" => "CREATE table if not exists movie (

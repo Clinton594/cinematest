@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setToast, defaultStatus } from "../redux/toastReducer";
+import { setToast, defaultStatus } from "../redux/reducers/toast";
 
 export default function Toaster() {
   const dispatch = useDispatch();
-  const { status: toast } = useSelector((store) => store);
+  const { toast } = useSelector((store) => store);
 
   const variant = toast.status ? "success" : "danger";
   const icon = toast.status ? "check" : "ban";

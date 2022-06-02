@@ -1,15 +1,15 @@
 <?php
 require_once 'functions.php';
+require_once 'Server.php';
 
-class Database
+class Database extends Server
 {
   public $isConnected = false;
-  public $server = "localhost";
   private static $mydb;
   private static $db_name;
   private static $db_password;
   private static $db_user;
-  public $local_servers = ['localhost'];
+
 
   public function __construct()
   {
@@ -36,52 +36,13 @@ class Database
     }
     return ($this::$mydb);
   }
-  public function getLocalServers()
-  {
-    return ($this->local_servers);
-  }
 
-  public function getServer()
+  public function run_table($schema)
   {
-    return ($this->server);
-  }
-  public function isLocalhost()
-  {
-    return in_array($this->getServer(), $this->getLocalServers());
-  }
-
-  public function getURIdata($str = false)
-  {
-    global $_SERVER;
-    $server = $this->getServer();
-    if (gettype($str) === "string") $_SERVER['REQUEST_URI'] = $str;
-    $request_uri = str_replace('https://', '', $_SERVER['REQUEST_URI']);
-    $request_uri = explode('/', str_replace('http://', '', $request_uri));
-    if ((array_search($this->getServer(), $this->getLocalServers()) !== false)) {
-      $site_name = !empty($request_uri[1]) ? $request_uri[1] : 'admindb';
-      $page_source = !empty($request_uri[2]) ? $request_uri[2] : '';
-      $content_id = !empty($request_uri[3]) ? $request_uri[3] : null;
-      $event = !empty($request_uri[4]) ? $request_uri[4] : null;
-      $parent_page = !empty($request_uri[5]) ? $request_uri[5] : null;
-      $other = !empty($request_uri[6]) ? $request_uri[6] : null;
-      $this->domain = "http://{$server}/{$site_name}/";
-    } else {
-      $site = str_replace("www.", "", $server);
-      $this->domain = "https://" . str_replace("https://", "", $server) . "/";
-      $site_name = str_replace("https://", "", $server);
-      $page_source = !empty($request_uri[1]) ? $request_uri[1] : '';
-      $content_id = !empty($request_uri[2]) ? $request_uri[2] : null;
-      $event = !empty($request_uri[3]) ? $request_uri[3] : null;
-      $parent_page = !empty($request_uri[4]) ? $request_uri[4] : null;
-      $other = !empty($request_uri[5]) ? $request_uri[5] : null;
+    $db = $this::$mydb;
+    foreach ($schema as $key => $query) {
+      $db->query($query) or die($db->error . "-- key($key)");
     }
-
-    return ((object)[
-      "page_source" => explode("?", $page_source)[0],
-      "content_id" => explode("?", $content_id)[0],
-      "event" => $event,
-      "other" => $other,
-      "site" => $this->domain,
-    ]);
+    return (["status" => true, "message" => "Successfuly Created Tables"]);
   }
 }

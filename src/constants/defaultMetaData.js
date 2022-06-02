@@ -1,4 +1,5 @@
 const metadata = {
+  loading: false,
   locations: [],
   languages: [],
   genre: [],
