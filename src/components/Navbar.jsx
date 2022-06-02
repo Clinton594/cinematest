@@ -1,13 +1,17 @@
 import $ from "jquery";
 import { Link } from "react-router-dom";
-import route from "../constants/routes";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import Logout from "./Icons/Logout";
+import route from "../constants/routes";
+import { Button } from "../components/Elements";
+import { logoutUser } from "../redux/reducers/user";
 import { getMetadata } from "../redux/reducers/metadata";
 
 export default function Navbar() {
   const dispatch = useDispatch();
-  const { metadata } = useSelector((store) => store);
+  const { metadata, user } = useSelector((store) => store);
   useEffect(() => {
     $(window).on("scroll", function () {
       const scroll = $(window).scrollTop() || 0;
@@ -22,6 +26,10 @@ export default function Navbar() {
       dispatch(getMetadata());
     }
   }, [metadata, dispatch]);
+
+  const logout = () => {
+    dispatch(logoutUser());
+  };
   return (
     <header className="navbar" role="navigation">
       <div className="container">
@@ -49,9 +57,23 @@ export default function Navbar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to={route.login}>
-                  Login
-                </Link>
+                {!user.isLoggedIn && (
+                  <Link className="nav-link" to={route.login}>
+                    Login
+                  </Link>
+                )}
+                {user.isLoggedIn && window.location.pathname !== route.dashboard && (
+                  <Link className="nav-link" to={route.dashboard}>
+                    Dashboard
+                  </Link>
+                )}
+                {user.isLoggedIn && window.location.pathname === route.dashboard && (
+                  <Button onClick={logout} className="nav-link" variant="danger">
+                    <span>
+                      <Logout /> Logout
+                    </span>
+                  </Button>
+                )}
               </li>
             </ul>
           </div>

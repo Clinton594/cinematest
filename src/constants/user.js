@@ -3,6 +3,7 @@ const defaultUser = {
   isLoggedIn: false,
   loading: false,
   email: "",
+  toast: { trigger: false },
 };
 
 export default defaultUser;

@@ -6,9 +6,16 @@ import BookingIcon from "../components/Icons/Booking";
 import Movie from "../components/Icons/Video";
 import TabMovies from "../components/admin/TabMovies";
 import TabBookings from "../components/admin/TabBookings";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+import route from "../constants/routes";
 
 export default function Admin() {
   const [tab, toggleTab] = useState(0);
+  const { user } = useSelector((store) => store);
+  if (!user.isLoggedIn) {
+    return <Navigate to={route.home} />;
+  }
   return (
     <main className="dashboard" style={{ backgroundImage: "url(/img/p3.png)", minHeight: "100vh" }}>
       <Navbar />
