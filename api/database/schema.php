@@ -26,7 +26,8 @@ $tableSchema = [
     primary key (id),
     location varchar(20) default null,
     theatre_name varchar(100) default null,
-    show_time varchar(20) default null,
+    show_date varchar(10) default null,
+    show_time varchar(10) default null,
     user_id int(11) default 0,
     movie_id varchar(20) default 0,
     date DATETIME NULL DEFAULT CURRENT_TIMESTAMP

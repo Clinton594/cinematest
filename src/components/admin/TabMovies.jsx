@@ -8,9 +8,9 @@ import NewMovie from "./NewMovie";
 import { getMovies } from "../../redux/reducers/shows";
 import { Col, Row, Content, Button } from "../Elements";
 
-export default function TabZero() {
+export default function TabMovies() {
   const dispatch = useDispatch();
-  const { movies, loading, status } = useSelector((store) => store.shows);
+  const { movies, loading, toast } = useSelector((store) => store.shows);
   const [showModal, toggleShowModal] = useState(false);
 
   useEffect(() => {
@@ -18,8 +18,8 @@ export default function TabZero() {
   }, [dispatch]);
 
   useEffect(() => {
-    status && !loading && toggleShowModal(false);
-  }, [status, loading]);
+    toast === true && !loading && toggleShowModal(false);
+  }, [toast, loading]);
 
   const tabledata = {
     columns: [
@@ -41,7 +41,7 @@ export default function TabZero() {
         selector: (row) => row.genre,
       },
       {
-        name: "Date",
+        name: "Date Created",
         selector: (row) => row.date,
       },
     ],

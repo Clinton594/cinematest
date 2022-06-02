@@ -88,6 +88,24 @@ class Database extends Server
     return ($content);
   }
 
+  public function query($sql)
+  {
+    $db = $this->connect();
+    $query = $db->query($sql) or die($db->error . "($sql)");
+    $content = [];
+    while ($row = $query->fetch_assoc()) {
+      $row = array_change_key_case(utf8ize($row));
+      if ($this->server !== "localhost" && array_search($this->server, $this::$local_servers) !== false) {
+        $row = array_map(function ($value) {
+          return str_replace("localhost", $this->server, $value);
+        }, $row);
+      }
+      $row = (object) $row;
+      $content[] = $row;
+    }
+    return ($content);
+  }
+
   public function insert($table, $data)
   {
     $db = $this->connect();
@@ -111,10 +129,11 @@ class Database extends Server
     if (!empty($data->id)) {
       $sql = "UPDATE $table SET $build WHERE id='{$data->id}'";
     } else $sql = "INSERT INTO $table SET $build";
+
     $query = $db->query($sql);
     if ($query) {
-      $response->status = 1;
-      $response->data = array_merge(arrray($data), ["id" => $db->insert_id, "data" => date("Y-m-d H:i:s")]);
+      $response->status = true;
+      $response->data = object(array_merge(arrray($data), ["id" => $db->insert_id, "date" => date("Y-m-d H:i:s")]));
     } else $response->message = $db->error;
 
     return $response;

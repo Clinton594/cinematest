@@ -230,6 +230,7 @@ aside > ul > li > div {
   cursor: pointer;
   padding: 8px 15px;
   border-radius: 4px;
+  transition: 0.4s all;
 }
 aside > ul > li > div:hover {
   text-decoration: none;
@@ -245,11 +246,14 @@ aside > ul > li > div > i {
   font-size: large;
   width: 25px;
 }
+aside > ul > li > div.active {
+  background-color: #c0158938;
+  font-weight: bold;
+}
 aside > ul > li > div > span {
   margin: 0px;
   font-family: Inter, sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-weight: 300;
   font-size: 1rem;
   line-height: 1.5;
   letter-spacing: 0.15px;
@@ -413,4 +417,20 @@ aside > ul > li > div > span {
 }
 .navbar-toggler {
   background-color: #e68720 !important;
+}
+input[type="time"],
+input[type="date"] {
+  height: 48px;
+  flex-direction: row;
+}
+.css-26l3qy-menu *,
+.css-qc6sy-singleValue,
+.css-14el2xx-placeholder,
+label small {
+  font-size: 0.7em !important;
+  font-weight: 400;
+}
+.idPHNo.rdt_TableHead {
+  font-size: 0.6em;
+  font-weight: bold;
 }

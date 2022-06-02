@@ -1,6 +1,6 @@
 import $ from "jquery";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import defaultShows from "../../constants/defaultMovies";
+import defaultShows from "../../constants/defaultShow";
 import route from "../../constants/routes";
 
 export const getMovies = createAsyncThunk("show/getMovies", async () => {
@@ -18,11 +18,31 @@ export const updateMovie = createAsyncThunk("show/updateMovie", async (data) => 
 export const deleteMovie = createAsyncThunk("show/deleteMovie", async (data) => {
   return await $.post(`${route.api}delete-movie`, data);
 });
+// Bookings
+export const getBookings = createAsyncThunk("show/getBookings", async () => {
+  return await $.get(`${route.api}bookings`);
+});
+
+export const createBooking = createAsyncThunk("show/createBooking", async (data) => {
+  return await $.post(`${route.api}create-booking`, data);
+});
+
+export const updateBooking = createAsyncThunk("show/updateBooking", async (data) => {
+  return await $.post(`${route.api}update-booking`, data);
+});
+
+export const deleteBooking = createAsyncThunk("show/deleteBooking", async (data) => {
+  return await $.post(`${route.api}delete-booking`, data);
+});
 
 const showSlice = createSlice({
   name: "show",
   initialState: defaultShows,
-  reducers: {},
+  reducers: {
+    resetToast: (state) => {
+      state.toast = { trigger: false };
+    },
+  },
   extraReducers: {
     // Get Movie
     [getMovies.pending]: (state) => {
@@ -43,25 +63,81 @@ const showSlice = createSlice({
     },
     [createMovie.rejected]: (state, { payload }) => {
       state.loading = false;
-      state.status = payload;
+      state.toast = { ...payload, trigger: true };
     },
     [createMovie.fulfilled]: (state, { payload }) => {
       state.loading = false;
       if (payload.status) {
         let movies = state.movies;
         movies.push(payload.data);
-        state.status = true;
+        state.toast = true;
       } else {
-        state.status = payload;
+        state.toast = { ...payload, trigger: true };
       }
     },
     // Update movie
-    [updateMovie.pending]: (state) => {},
-    [updateMovie.fulfilled]: (state, { payload }) => {},
+    [updateMovie.pending]: (state) => {
+      state.loading = true;
+    },
+    [updateMovie.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+    },
     // Delete Movie
-    [deleteMovie.pending]: (state) => {},
-    [deleteMovie.fulfilled]: (state, { payload }) => {},
+    [deleteMovie.pending]: (state) => {
+      state.loading = true;
+    },
+    [deleteMovie.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+    },
+
+    // =======================================================bookings
+    // Get Booking
+    [getBookings.pending]: (state) => {
+      state.loading = true;
+    },
+    [getBookings.rejected]: (state) => {
+      state.loading = false;
+    },
+    [getBookings.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      if (payload.status) {
+        state.bookings = payload.data;
+      }
+    },
+    // Create new Booking
+    [createBooking.pending]: (state) => {
+      state.loading = true;
+    },
+    [createBooking.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.toast = { ...payload, trigger: true };
+    },
+    [createBooking.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      if (payload.status) {
+        let bookings = state.bookings;
+        bookings.push(payload.data);
+        state.toast = true;
+      } else {
+        state.toast = { ...payload, trigger: true };
+      }
+    },
+    // Update Booking
+    [updateBooking.pending]: (state) => {
+      state.loading = true;
+    },
+    [updateBooking.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+    },
+    // Delete Booking
+    [deleteBooking.pending]: (state) => {
+      state.loading = true;
+    },
+    [deleteBooking.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+    },
   },
 });
 
 export default showSlice.reducer;
+export const { resetToast } = showSlice.actions;

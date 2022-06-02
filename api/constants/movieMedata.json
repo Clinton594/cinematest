@@ -2,26 +2,57 @@
   "locations": [
     {
       "name": "Enugu",
+      "theatre": [
+        "Room A",
+        "Room B",
+        "Room C"
+      ],
       "address": "The Palms Polo-Park mall, Enugu"
     },
     {
       "name": "Ikeja",
+      "theatre": [
+        "Room Alpha",
+        "Room Beta",
+        "Room Cypher"
+      ],
       "address": "Ikeja Shopping Mall"
     },
     {
       "name": "Abuja",
+      "theatre": [
+        "Theatre Amazon",
+        "Firefly Zone",
+        "Cold Room",
+        "Couple Theatre"
+      ],
       "address": "Iketu location bar street"
     },
     {
       "name": "Ilorin",
+      "theatre": [
+        "Business Class",
+        "Economy Class",
+        "Elites"
+      ],
       "address": "The Palms Shopping Mall, Fate Road Ilorin, Kwara State."
     },
     {
       "name": "Lagos",
+      "theatre": [
+        "Subway Theatre",
+        "Rooftop Theatre",
+        "V-R Zone"
+      ],
       "address": "TJara mall, Simbiat Abiola Way, Ikeja."
     },
     {
       "name": "Anambra",
+      "theatre": [
+        "Theatre A",
+        "Theatre B",
+        "Theatre C"
+      ],
       "address": "The Spar shopping mall, Eke"
     }
   ],
