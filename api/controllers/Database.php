@@ -45,4 +45,78 @@ class Database extends Server
     }
     return (["status" => true, "message" => "Successfuly Created Tables"]);
   }
+
+  public function getTableFields($table)
+  {
+    $result = [];
+    $db = $this->connect();
+
+    if ($row = $db->query("DESCRIBE {$table}") or die($db->error)) {
+      while ($r = $row->fetch_assoc()) {
+        $name = strtoupper($r['Field']);
+        $result[] = trim(strtolower($name));
+      }
+    }
+    return ($result);
+  }
+
+  public function select($table, $filter = "")
+  {
+    $filter = implode(" AND ", array_map(function ($x) {
+      $y = explode("=", $x);
+      return "{$y[0]}='{$y[1]}'";
+    }, array_filter(explode(",", $filter), function ($x) {
+      return !empty($x);
+    })));
+
+    $filter = empty($filter) ? "" : "WHERE {$filter}";
+
+    $sql = "SELECT * FROM $table  $filter ORDER BY id DESC";
+    $db = $this->connect();
+    $query = $db->query($sql) or die($db->error . "($sql)");
+    $content = [];
+    while ($row = $query->fetch_assoc()) {
+      $row = array_change_key_case(utf8ize($row));
+      if ($this->server !== "localhost" && array_search($this->server, $this::$local_servers) !== false) {
+        $row = array_map(function ($value) {
+          return str_replace("localhost", $this->server, $value);
+        }, $row);
+      }
+      $row = (object) $row;
+      $content[] = $row;
+    }
+    return ($content);
+  }
+
+  public function insert($table, $data)
+  {
+    $db = $this->connect();
+    $response = new stdClass;
+    $build    = array();
+    $fields   = $this->getTableFields($table);
+    $response->status = 0;
+    foreach ($data as $key => $value) {
+      if (array_search(strtolower($key), $fields) !== false) {
+        if (gettype($value) == "object" || gettype($value) == "array") {
+          $value = json_encode($value);
+        } else {
+          $v = $db->real_escape_string($value);
+          $v = trim($v);
+          $value = $v;
+        }
+        $build[] = "$key='{$value}'";
+      }
+    }
+    $build = implode(", ", $build);
+    if (!empty($data->id)) {
+      $sql = "UPDATE $table SET $build WHERE id='{$data->id}'";
+    } else $sql = "INSERT INTO $table SET $build";
+    $query = $db->query($sql);
+    if ($query) {
+      $response->status = 1;
+      $response->data = array_merge(arrray($data), ["id" => $db->insert_id, "data" => date("Y-m-d H:i:s")]);
+    } else $response->message = $db->error;
+
+    return $response;
+  }
 }

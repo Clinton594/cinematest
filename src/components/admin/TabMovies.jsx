@@ -1,11 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { Col, Row, Content, Aside, Ul, Li, Container, Button } from "../Elements";
+import { useDispatch, useSelector } from "react-redux";
+
 import Add from "../Icons/Add";
+import Spinner from "../Spinner";
 import NewMovie from "./NewMovie";
+import { getMovies } from "../../redux/reducers/shows";
+import { Col, Row, Content, Button } from "../Elements";
 
 export default function TabZero() {
+  const dispatch = useDispatch();
+  const { movies, loading, status } = useSelector((store) => store.shows);
   const [showModal, toggleShowModal] = useState(false);
+
+  useEffect(() => {
+    dispatch(getMovies());
+  }, [dispatch]);
+
+  useEffect(() => {
+    status && !loading && toggleShowModal(false);
+  }, [status, loading]);
+
   const tabledata = {
     columns: [
       {
@@ -14,20 +29,20 @@ export default function TabZero() {
         sortable: true,
       },
       {
-        name: "Year",
-        selector: (row) => row.year,
-      },
-    ],
-    data: [
-      {
-        id: 1,
-        title: "Beetlejuice",
-        year: "1988",
+        name: "Cast",
+        selector: (row) => row.cast,
       },
       {
-        id: 2,
-        title: "Ghostbusters",
-        year: "1984",
+        name: "Language",
+        selector: (row) => row.language,
+      },
+      {
+        name: "Genre",
+        selector: (row) => row.genre,
+      },
+      {
+        name: "Date",
+        selector: (row) => row.date,
       },
     ],
   };
@@ -40,18 +55,20 @@ export default function TabZero() {
       </Row>
       <Row>
         <Col md={12}>
-          <DataTable columns={tabledata.columns} data={tabledata.data} selectableRows pagination />
+          <DataTable columns={tabledata.columns} data={movies} selectableRows pagination />
         </Col>
       </Row>
       <Row>
         <Col className="mt-4 d-flex justify-content-end" md="12">
           <Button
+            disabled={loading}
             variant="warning"
             onClick={() => {
               toggleShowModal(true);
             }}
           >
-            <Add /> <span> New Movie</span>
+            {!loading && <Add />}
+            <span> New Movie</span> {loading && <Spinner animation="grow" size="sm" variant="default" />}
           </Button>
         </Col>
       </Row>

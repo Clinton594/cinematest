@@ -16,7 +16,16 @@ body > div {
   float: left;
   overflow-x: hidden;
 }
-
+.navbar-collapse.show {
+  position: absolute;
+  display: block;
+  right: 0;
+  top: 70px;
+  text-align: right;
+  background-color: #e6872057;
+  border-radius: 4px;
+  z-index: 200;
+}
 header.navbar.sticky {
   position: -webkit-relative;
   position: relative;
@@ -396,8 +405,12 @@ aside > ul > li > div > span {
   left: unset;
   height: auto;
   transform: translateY(0px);
+  overflow: unset;
 }
 
 .toast.show {
-  z-index: 1050;
+  z-index: 2050;
+}
+.navbar-toggler {
+  background-color: #e68720 !important;
 }

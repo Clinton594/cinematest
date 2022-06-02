@@ -4,7 +4,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import routes from "../../constants/routes";
 
 export default function Protected() {
-  // const { presale } = useSelector((store: IStore) => store);
-  // if (!presale.isAdmin) return <Navigate to={routes.presale} />;
+  const { user } = useSelector((store) => store);
+  if (!user.isLoggedIn) return <Navigate to={routes.home} />;
   return <Outlet />;
 }

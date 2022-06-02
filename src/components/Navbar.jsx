@@ -8,10 +8,17 @@ import route from "../constants/routes";
 import { Button } from "../components/Elements";
 import { logoutUser } from "../redux/reducers/user";
 import { getMetadata } from "../redux/reducers/metadata";
+import Menu from "./Icons/Menu";
 
 export default function Navbar() {
   const dispatch = useDispatch();
   const { metadata, user } = useSelector((store) => store);
+  useEffect(() => {
+    if (metadata.locations.length === 0) {
+      dispatch(getMetadata());
+    }
+  }, [metadata, dispatch]);
+
   useEffect(() => {
     $(window).on("scroll", function () {
       const scroll = $(window).scrollTop() || 0;
@@ -22,11 +29,12 @@ export default function Navbar() {
       }
     });
 
-    if (metadata.locations.length === 0) {
-      dispatch(getMetadata());
-    }
-  }, [metadata, dispatch]);
+    $(".preloader").fadeOut("slow");
+  }, []);
 
+  const toggleNav = () => {
+    $("#navbarSupportedContent").toggleClass("show");
+  };
   const logout = () => {
     dispatch(logoutUser());
   };
@@ -37,16 +45,8 @@ export default function Navbar() {
           <Link className="navbar-brand" to={route.home}>
             <img className="mt-2" width="250" src="/img/logo.png" alt="" />
           </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
+          <button onClick={toggleNav} className="navbar-toggler" type="button">
+            <Menu />
           </button>
 
           <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
@@ -68,11 +68,11 @@ export default function Navbar() {
                   </Link>
                 )}
                 {user.isLoggedIn && window.location.pathname === route.dashboard && (
-                  <Button onClick={logout} className="nav-link" variant="danger">
+                  <a href="void:;" onClick={logout} className="nav-link" variant="danger">
                     <span>
                       <Logout /> Logout
                     </span>
-                  </Button>
+                  </a>
                 )}
               </li>
             </ul>

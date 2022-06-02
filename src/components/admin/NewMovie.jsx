@@ -1,15 +1,41 @@
-import React, { useEffect, useState } from "react";
 import Select from "react-select";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import Spinner from "../Spinner";
+import { createMovie } from "../../redux/reducers/shows";
 import { Form, FormElement, Row, Col } from "../Elements";
+import { setToast } from "../../redux/reducers/toast";
 
 export default function NewMovie({ toggleShowModal, showModal }) {
+  const dispatch = useDispatch();
+  const { metadata, shows } = useSelector((store) => store);
   const [swipe, toggleSwipe] = useState("");
+  const [movie, updateMovie] = useState({ title: "", cast: "", genre: "", language: "" });
+  const loading = shows.loading;
 
   useEffect(() => {
     setTimeout(() => {
       toggleSwipe((showModal && "show") || "");
     }, 100);
   }, [showModal]);
+
+  const updateField = (e, f) => {
+    !f && updateMovie({ ...movie, [e.target.name]: e.target.value });
+    if (f && f.action) {
+      let value;
+      if (f.option) value = e.map((x) => x.value).join();
+      else value = e.value;
+      updateMovie({ ...movie, [f.name]: value });
+    }
+  };
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    if (Object.values(movie).every((x) => x)) {
+      dispatch(createMovie(movie));
+    } else dispatch(setToast({ status: false, show: true, title: "Movies", message: "Fill up empty fields" }));
+  };
   return (
     <>
       <div
@@ -25,45 +51,58 @@ export default function NewMovie({ toggleShowModal, showModal }) {
               <Form>
                 <Row>
                   <Col md={12}>
-                    <FormElement label="Movie Title" name="title" />
-                  </Col>
-                  <Col md={12}>
-                    <FormElement label="Cast" name="cast" />
+                    <FormElement
+                      disabled={loading}
+                      onChange={updateField}
+                      label="Movie Title"
+                      value={movie.title}
+                      name="title"
+                      required
+                    />
                   </Col>
                   <Col md={6}>
-                    <label>
-                      <small>Choose Genre</small>{" "}
-                    </label>
-                    <Select
-                      label=""
-                      name="city"
-                      defaultValue="one"
-                      options={[
-                        { value: "one", label: "One" },
-                        { value: "two", label: "Two" },
-                      ]}
+                    <FormElement
+                      disabled={loading}
+                      onChange={updateField}
+                      value={movie.cast}
+                      label="Cast"
+                      name="cast"
+                      required
                     />
                   </Col>
                   <Col md={6}>
                     <label>
-                      <small>Choose Language</small>{" "}
+                      <small>Choose Genre</small>
                     </label>
                     <Select
-                      label="Title"
-                      name="city"
-                      defaultValue="one"
-                      options={[
-                        { value: "one", label: "English" },
-                        { value: "two", label: "French" },
-                      ]}
+                      name="genre"
+                      defaultValue={movie.genre}
+                      options={metadata.genre.map((x) => ({ label: x, value: x }))}
+                      onChange={updateField}
+                      required
+                      isDisabled={loading}
+                    />
+                  </Col>
+                  <Col md={12}>
+                    <label>
+                      <small>Choose Audio Languages</small>
+                    </label>
+                    <Select
+                      name="language"
+                      isMulti
+                      defaultValue={movie.language.split(",")}
+                      options={metadata.languages.map((x) => ({ label: x, value: x }))}
+                      onChange={updateField}
+                      required
+                      isDisabled={loading}
                     />
                   </Col>
                 </Row>
               </Form>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-danger">
-                Save changes
+              <button onClick={submitForm} type="button" className="btn btn-danger d-flex align-items-center">
+                Save changes {loading && <Spinner variant="warning" className="ml-2" size="sm" animation="border" />}
               </button>
             </div>
           </div>

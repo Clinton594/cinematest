@@ -6,10 +6,11 @@ import { persistReducer } from "redux-persist";
 
 import metadata from "./reducers/metadata";
 import toast from "./reducers/toast";
+import shows from "./reducers/shows";
 
 import user from "./reducers/user";
 
-const reducers = combineReducers({ metadata, toast, user });
+const reducers = combineReducers({ metadata, toast, user, shows });
 const persistConfig = {
   key: "root",
   storage,

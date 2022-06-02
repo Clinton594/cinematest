@@ -15,7 +15,8 @@ $tableSchema = [
     id int unsigned not null auto_increment,
     primary key (id),
     title varchar(50) default null,
-    movie_cast varchar(100) default null,
+    cast varchar(100) default null,
+    language varchar(100) default null,
     genre varchar(10) default null,
     user_id int(11) not null default 0,
     date DATETIME NULL DEFAULT CURRENT_TIMESTAMP

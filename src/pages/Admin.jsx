@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Section from "../components/Section";
-import { Col, Row, Content, Aside, Ul, Li, Container, Button } from "../components/Elements";
+import { Col, Row, Content, Aside, Ul, Li } from "../components/Elements";
 import BookingIcon from "../components/Icons/Booking";
 import Movie from "../components/Icons/Video";
 import TabMovies from "../components/admin/TabMovies";
@@ -9,16 +9,18 @@ import TabBookings from "../components/admin/TabBookings";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import route from "../constants/routes";
+import Toaster from "../components/Toaster";
 
 export default function Admin() {
   const [tab, toggleTab] = useState(0);
-  const { user } = useSelector((store) => store);
-  if (!user.isLoggedIn) {
-    return <Navigate to={route.home} />;
-  }
+  // const { user } = useSelector((store) => store);
+
+  useEffect(() => {}, []);
+
   return (
     <main className="dashboard" style={{ backgroundImage: "url(/img/p3.png)", minHeight: "100vh" }}>
       <Navbar />
+      <Toaster />
       <Content className="page-content">
         <Section className="mx-4">
           <Row>

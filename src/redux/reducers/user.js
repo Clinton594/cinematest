@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import defaultUser from "../../constants/user";
 import route from "../../constants/routes";
 
-export const login = createAsyncThunk("user/login", async (data, { dispatch }) => {
+export const login = createAsyncThunk("user/login", async (data) => {
   return await $.post(`${route.api}login`, data);
 });
 

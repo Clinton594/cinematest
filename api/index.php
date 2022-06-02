@@ -4,6 +4,7 @@ header('Content-Type: application/json');
 
 require_once("controllers/Database.php");
 require_once("controllers/Auth.php");
+require_once("controllers/Shows.php");
 require_once("database/schema.php");
 
 
@@ -11,7 +12,7 @@ $Database = new Database;
 $db = $Database->connect();
 $api = $Database->getURIdata();
 
-$post = isJson(file_get_contents('php://input'));
+$post = isJson(file_get_contents('php://input')); //postman
 if (empty($post)) {
   $post = object($_POST);
 }
@@ -28,6 +29,14 @@ switch ($api->route) {
   case 'login':
     $auth = new Auth($Database);
     $response = $auth->login($post);
+    break;
+  case 'movies':
+    $movie = new Shows($Database);
+    $response = $movie->fetchMovies();
+    break;
+  case 'create-movie':
+    $movie = new Shows($Database);
+    $response = $movie->createMovie($post);
     break;
   default:
     $response->status = false;

@@ -4,7 +4,7 @@ export default function Logout() {
   return (
     <i>
       <svg
-        fill="white"
+        fill="orange"
         width={20}
         strokeWidth="2"
         version="1.1"
