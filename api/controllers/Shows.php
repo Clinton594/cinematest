@@ -64,10 +64,23 @@ class Shows extends Auth
 
     $sort =  "ORDER BY m.id DESC";
     $filter = "";
+    list("data" => $data) = $db->getMetadata();
+    $locations = array_map(function ($x) {
+      return $x->name;
+    }, $data->locations);
 
     if (!empty($filters->sort)) $sort = "ORDER BY m.{$filters->sort} ASC";
     if (!empty($filters->filter)) {
       $filter = "WHERE " . $db->filterQuery(str_replace("~", "=", $filters->filter));
+      // Extrac locations from filters
+      $_loc = array_map(function ($x) {
+        return $x[1];
+      }, array_filter(array_map(function ($x) {
+        return explode("~", $x);
+      }, explode(",", $filters->filter)), function ($x) {
+        return $x[0] === "location";
+      }));
+      if (count($_loc)) $locations = $_loc;
     }
 
     $bookin = $db->select("booking");
@@ -82,16 +95,18 @@ class Shows extends Auth
     ";
     $movies = $db->query($sql);
 
-    $response->data = array_map(function ($movie) use ($bookin) {
+    $response->data = array_map(function ($movie) use ($bookin, $locations) {
       $movie->language = str_replace(",", ", ", $movie->language);
+
       $booked = array_map(function ($x) {
         $bdate = new DateTime("{$x->show_date} {$x->show_time}");
         $x->date = $bdate->format("Y-m-d h:ia");
         $x->price = "$" . $x->price;
         return $x;
-      }, array_filter($bookin, function ($booked) use ($movie) {
-        return $booked->movie_id === $movie->id;
+      }, array_filter($bookin, function ($booked) use ($movie, $locations) {
+        return $booked->movie_id === $movie->id && in_array(strtolower($booked->location), $locations);
       }));
+
       $movie->booked = array_group(array_values($booked), "location");
       $movie->num_location = count($movie->booked);
       return $movie;
