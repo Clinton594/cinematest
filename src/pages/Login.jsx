@@ -33,7 +33,7 @@ export default function Login() {
       dispatch(offToast());
       dispatch(setToast({ status: user.toast.status, show: true, title: "Login", message: user.toast.message }));
     }
-  }, [user.toast, dispatch, offToast]);
+  }, [user.toast, dispatch]);
 
   if (user.isLoggedIn === true) {
     return <Navigate to={route.dashboard} />;

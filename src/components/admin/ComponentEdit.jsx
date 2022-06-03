@@ -1,5 +1,4 @@
 import React from "react";
-import Edit from "../Icons/Edit";
 
 export default function ComponentEdit(row, index) {
   return (

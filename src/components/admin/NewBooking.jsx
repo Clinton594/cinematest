@@ -32,7 +32,7 @@ export default function NewBooking({ toggleShowModal, showModal }) {
     if (event.location) {
       updateTheatres(metadata.locations.filter((x) => x.name === event.location).shift().theatre);
     } else updateTheatres([]);
-  }, [event.location]);
+  }, [event.location, metadata.locations]);
 
   useEffect(() => {
     if (shows.edit !== false && shows.edit.section === "Booking") {
