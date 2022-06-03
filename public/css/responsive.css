@@ -8,8 +8,15 @@
     bottom: 0;
     background-color: #01070d96;
   }
+  .modal.fade.show {
+    width: unset;
+    left: 0;
+    min-width: 360px;
+  }
   .row.section.locations {
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 1fr 1fr;
     grid-template-columns: 1fr 1fr;
   }
   div.row.blurb {
