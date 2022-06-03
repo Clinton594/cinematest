@@ -1,6 +1,6 @@
 import $ from "jquery";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import defaultMetadata from "../../constants/defaultMetadata";
+import defaultMetadata from "../../constants/defaultMetaData";
 import route from "../../constants/routes";
 
 export const getMetadata = createAsyncThunk("metadata/getMetadata", async () => {
