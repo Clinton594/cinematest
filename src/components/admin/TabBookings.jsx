@@ -9,7 +9,7 @@ import Booking from "../Icons/Booking";
 import { Col, Row, Content } from "../Elements";
 import tabledata from "../../constants/tableFormats";
 import { setToast } from "../../redux/reducers/toast";
-import { getBookings, resetToast } from "../../redux/reducers/shows";
+import { editSlice, getBookings, resetToast } from "../../redux/reducers/shows";
 
 export default function TabBookings() {
   const dispatch = useDispatch();
@@ -29,7 +29,11 @@ export default function TabBookings() {
   }, [toast, loading]);
 
   const handleChange = (data) => {};
-
+  const editRow = (row) => {
+    toggleShowModal(true);
+    const copy = { ...row, section: "Booking" };
+    dispatch(editSlice(copy));
+  };
   return (
     <Content id="id">
       <h5 className="d-flex justify-content-between w-100 align-item-center">
@@ -56,6 +60,7 @@ export default function TabBookings() {
         <Col md={12}>
           <DataTable
             onSelectedRowsChange={handleChange}
+            onRowClicked={editRow}
             columns={tabledata.bookings}
             data={bookings}
             selectableRows

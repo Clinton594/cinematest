@@ -136,10 +136,14 @@ class Shows extends Auth
     $response = object(["status" => false]);
     if ($this->authenticateUser()) {
       $data =  $db->select("booking", "location={$event->location}, theatre_name={$event->theatre_name}, show_time={$event->show_time},show_date={$event->show_date}");
-      if (!count($data)) {
+      if (!count($data) || !empty($event->id)) {
         $response =  $db->insert("booking", $event);
         if ($response->status) {
+
           $response = $this->fetchBookings($response->data->id);
+          if (!empty($event->id)) {
+            $response["edited"] = true;
+          }
         }
       } else  $response->message = "DATA_EXISTS";
     } else $response->message = "UNAUTHORIZED_ACCESS";

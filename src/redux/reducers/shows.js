@@ -120,8 +120,19 @@ const showSlice = createSlice({
     [createBooking.fulfilled]: (state, { payload }) => {
       state.loading = false;
       if (payload.status) {
+        const { data } = payload;
         let bookings = state.bookings;
-        bookings.push(payload.data);
+        console.log(payload);
+        if (payload.edited) {
+          state.bookings = current(bookings).map((x) => {
+            if (x.id === data.id) {
+              x = data;
+            }
+            return x;
+          });
+        } else {
+          bookings.push(data);
+        }
         state.toast = true;
       } else {
         state.toast = { ...payload, trigger: true };

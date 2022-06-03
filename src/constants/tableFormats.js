@@ -35,29 +35,36 @@ const tabledata = {
   ],
   bookings: [
     {
-      name: "Location",
-      selector: (row) => row.location,
-      sortable: true,
+      name: "Movie Title",
+      selector: (row) => row.title,
+      ignoreRowClick: true,
     },
     {
       name: "Theatre",
       selector: (row) => row.theatre_name,
+      ignoreRowClick: true,
     },
+
     {
-      name: "Movie Title",
-      selector: (row) => row.title,
+      name: "Location",
+      selector: (row) => row.location,
+      sortable: true,
+      ignoreRowClick: true,
     },
     {
       name: "Showing by",
       selector: (row) => row.formatted_show_time,
+      ignoreRowClick: true,
     },
     {
       name: "Show price",
       selector: (row) => row.price,
+      ignoreRowClick: true,
     },
     {
       name: "Date Created",
       selector: (row) => row.date,
+      ignoreRowClick: true,
     },
     {
       name: "",

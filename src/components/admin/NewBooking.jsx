@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Spinner from "../Spinner";
-import { createBooking } from "../../redux/reducers/shows";
+import { createBooking, resetToast } from "../../redux/reducers/shows";
 import { Form, FormElement, Row, Col } from "../Elements";
 import { setToast } from "../../redux/reducers/toast";
 
@@ -34,13 +34,26 @@ export default function NewBooking({ toggleShowModal, showModal }) {
     } else updateTheatres([]);
   }, [event.location]);
 
+  useEffect(() => {
+    if (shows.edit !== false && shows.edit.section === "Booking") {
+      const prepared = { ...shows.edit, price: shows.edit.price.replace("$", "") };
+      delete prepared.date;
+      updateEvent(prepared);
+    }
+  }, [shows.edit]);
+
   const updateField = (e, f) => {
     !f && updateEvent({ ...event, [e.target.name]: e.target.value });
     if (f && f.action) {
       let value;
       if (f.option) value = e.map((x) => x.value).join();
       else value = e.value;
-      updateEvent({ ...event, [f.name]: value });
+      const newEvent = { ...event };
+      if (f.name === "movie_id") {
+        const title = shows.movies.filter((x) => x.id === value).shift();
+        newEvent.title = title.title;
+      }
+      updateEvent({ ...newEvent, [f.name]: value });
     }
   };
 
@@ -55,6 +68,7 @@ export default function NewBooking({ toggleShowModal, showModal }) {
       <div
         onClick={() => {
           toggleShowModal(!showModal);
+          dispatch(resetToast());
         }}
         className="fade modal-backdrop show"
       ></div>
@@ -70,7 +84,8 @@ export default function NewBooking({ toggleShowModal, showModal }) {
                     </label>
                     <Select
                       name="location"
-                      defaultValue={event.location}
+                      defaultValue={{ label: event.location, value: event.location }}
+                      value={{ label: event.location, value: event.location }}
                       options={metadata.locations.map((x) => ({ label: x.name, value: x.name }))}
                       onChange={updateField}
                       required
@@ -83,7 +98,8 @@ export default function NewBooking({ toggleShowModal, showModal }) {
                     </label>
                     <Select
                       name="theatre_name"
-                      defaultValue={event.theatre_name}
+                      defaultValue={{ label: event.theatre_name, value: event.theatre_name }}
+                      value={{ label: event.theatre_name, value: event.theatre_name }}
                       options={theatres.map((x) => ({ label: x, value: x }))}
                       onChange={updateField}
                       required
@@ -96,7 +112,8 @@ export default function NewBooking({ toggleShowModal, showModal }) {
                     </label>
                     <Select
                       name="movie_id"
-                      defaultValue={event.movie_id}
+                      defaultValue={{ label: event.title, value: event.movie_id }}
+                      value={{ label: event.title, value: event.movie_id }}
                       options={shows.movies.map((x) => ({ label: x.title, value: x.id }))}
                       onChange={updateField}
                       required
@@ -111,6 +128,7 @@ export default function NewBooking({ toggleShowModal, showModal }) {
                       label="Show Price"
                       name="price"
                       type="number"
+                      step={0.05}
                       required
                     />
                   </Col>
