@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import { useSelector } from "react-redux";
 import Footer from "../components/Footer";
 import Location from "../components/Location";
+import route from "../constants/routes";
 
 export default function Home() {
   const { locations } = useSelector((store) => store.metadata);
@@ -34,7 +35,7 @@ export default function Home() {
               {locations.length > 0 &&
                 locations.map((location) => (
                   <div key={location.name} className="col d-flex justify-content-center">
-                    <Link to={`/movies/?filter=location~${location.name.toLowerCase()}`}>
+                    <Link to={`${route.movie}/?filter=location~${location.name.toLowerCase()}`}>
                       <Location event={location} />
                     </Link>
                   </div>

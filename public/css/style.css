@@ -194,6 +194,7 @@ input:focus-visible {
   background-image: url("../img/krists-luhaers-AtPWnYNDJnM-unsplash.jpg") !important;
   height: 250px !important;
   background-size: cover;
+  position: relative;
 }
 
 .banner-title {

@@ -107,7 +107,7 @@ export default function Home() {
                     />
                   </Col>
                   <Col md={2} className="d-flex align-items-end">
-                    <Button disabled={loading} type="submit" variant="danger">
+                    <Button className="mt-3" disabled={loading} type="submit" variant="danger">
                       Apply {loading && <Spinner variant="info" size="sm" animation="grow" />}
                     </Button>
                   </Col>
