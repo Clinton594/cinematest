@@ -3,6 +3,7 @@ const defaultShows = {
   toast: { trigger: false },
   movies: [],
   bookings: [],
+  booked: [],
 };
 
 export default defaultShows;

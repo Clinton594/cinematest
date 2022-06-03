@@ -35,6 +35,10 @@ export const deleteBooking = createAsyncThunk("show/deleteBooking", async (data)
   return await $.post(`${route.api}delete-booking`, data);
 });
 
+export const getShows = createAsyncThunk("show/getShows", async () => {
+  return await $.get(`${route.api}shows`);
+});
+
 const showSlice = createSlice({
   name: "show",
   initialState: defaultShows,
@@ -126,6 +130,9 @@ const showSlice = createSlice({
     [updateBooking.pending]: (state) => {
       state.loading = true;
     },
+    [updateBooking.rejected]: (state) => {
+      state.loading = false;
+    },
     [updateBooking.fulfilled]: (state, { payload }) => {
       state.loading = false;
     },
@@ -133,8 +140,25 @@ const showSlice = createSlice({
     [deleteBooking.pending]: (state) => {
       state.loading = true;
     },
+    [deleteBooking.rejected]: (state) => {
+      state.loading = false;
+    },
     [deleteBooking.fulfilled]: (state, { payload }) => {
       state.loading = false;
+    },
+
+    // Get Frontend Shows
+    [getShows.pending]: (state) => {
+      state.loading = true;
+    },
+    [getShows.rejected]: (state) => {
+      state.loading = false;
+    },
+    [getShows.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      if (payload.status) {
+        state.booked = payload.data;
+      }
     },
   },
 });

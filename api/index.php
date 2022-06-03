@@ -46,6 +46,10 @@ switch ($api->route) {
     $movie = new Shows($Database);
     $response = $movie->createBooking($post);
     break;
+  case 'shows':
+    $movie = new Shows($Database);
+    $response = $movie->listShows();
+    break;
   default:
     $response->status = false;
     $response->message = "INVALID_HTTP_REQUEST";

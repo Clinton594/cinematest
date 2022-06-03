@@ -30,6 +30,7 @@ $tableSchema = [
     show_time varchar(10) default null,
     user_id int(11) default 0,
     movie_id varchar(20) default 0,
+    price decimal(15,2)	default 0.00,
     date DATETIME NULL DEFAULT CURRENT_TIMESTAMP
   )",
 ];

@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import { Button } from "../components/Elements";
 import { useSelector } from "react-redux";
 import Footer from "../components/Footer";
+import Location from "../components/Location";
 
 export default function Home() {
   const { locations } = useSelector((store) => store.metadata);
@@ -30,14 +31,12 @@ export default function Home() {
               <h2 className="text-center light-text text-danger">Choose where to watch from</h2>
               <hr />
             </header>
-            <div className="row section">
+            <div className="row section locations">
               {locations.length > 0 &&
                 locations.map((location) => (
                   <div key={location.name} className="col d-flex justify-content-center">
                     <Link to={`/movies/${location.name.toLowerCase()}`}>
-                      <Button variant="danger" className="px-4 my-2">
-                        {location.name}
-                      </Button>
+                      <Location event={location} />
                     </Link>
                   </div>
                 ))}

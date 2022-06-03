@@ -18,6 +18,7 @@ function App() {
           <Route path={route.home} exact element={<Home />} />
           <Route path={route.login} exact element={<Login />} />
           <Route path={route.movies} exact element={<Movies />} />
+          <Route path={`${route.movies}:id`} exact element={<Movies />} />
           {/* The only protected route */}
           <Route path={route.dashboard} exact element={<Protected />}>
             <Route path={route.dashboard} exact element={<Admin />} />

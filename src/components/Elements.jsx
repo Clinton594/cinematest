@@ -1,5 +1,5 @@
-export const Row = ({ children }) => {
-  return <div className="row">{children}</div>;
+export const Row = ({ children, className }) => {
+  return <div className={`row ${className || ""}`}>{children}</div>;
 };
 
 export const Col = ({ sm, md, lg, children, className }) => {

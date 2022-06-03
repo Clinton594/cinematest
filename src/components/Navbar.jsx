@@ -43,7 +43,7 @@ export default function Navbar() {
       <div className="container">
         <nav className="navbar navbar-expand-lg w-100">
           <Link className="navbar-brand" to={route.home}>
-            <img className="mt-2" width="250" src="/img/logo.png" alt="" />
+            <img className="mt-2" src="/img/logo.png" alt="" />
           </Link>
           <button onClick={toggleNav} className="navbar-toggler" type="button">
             <Menu />

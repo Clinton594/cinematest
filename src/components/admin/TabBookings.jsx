@@ -8,6 +8,7 @@ import NewBooking from "./NewBooking";
 import { getBookings } from "../../redux/reducers/shows";
 import { Col, Row, Content, Button } from "../Elements";
 import { setToast } from "../../redux/reducers/toast";
+import tabledata from "../../constants/tableFormats";
 
 export default function TabBookings() {
   const dispatch = useDispatch();
@@ -26,34 +27,23 @@ export default function TabBookings() {
   }, [toast, loading]);
 
   const handleChange = (data) => {};
-  const tabledata = {
-    columns: [
-      {
-        name: "Location",
-        selector: (row) => row.location,
-        sortable: true,
-      },
-      {
-        name: "Theatre",
-        selector: (row) => row.theatre_name,
-      },
-      {
-        name: "Movie Title",
-        selector: (row) => row.title,
-      },
-      {
-        name: "Showing by",
-        selector: (row) => row.formatted_show_time,
-      },
-      {
-        name: "Date Created",
-        selector: (row) => row.date,
-      },
-    ],
-  };
+
   return (
     <Content id="id">
-      <h5>Booked Movies</h5>
+      <h5 className="d-flex justify-content-between w-100 align-item-center">
+        <span>Booked Movie Shows</span>
+        <button
+          disabled={loading}
+          className="btn-success btn"
+          onClick={() => {
+            toggleShowModal(true);
+          }}
+        >
+          {!loading && <Add />}
+          <span className="text-white"> Create Booking</span>{" "}
+          {loading && <Spinner animation="grow" size="sm" variant="default" />}
+        </button>
+      </h5>
       <hr />
       <Row>
         <Col md={3} sm={6}></Col>
@@ -62,26 +52,11 @@ export default function TabBookings() {
         <Col md={12}>
           <DataTable
             onSelectedRowsChange={handleChange}
-            columns={tabledata.columns}
+            columns={tabledata.bookings}
             data={bookings}
             selectableRows
             pagination
           />
-        </Col>
-      </Row>
-      <Row>
-        <Col className="mt-4 d-flex justify-content-end" md="12">
-          <Button
-            disabled={loading}
-            variant="danger"
-            onClick={() => {
-              toggleShowModal(true);
-            }}
-          >
-            {!loading && <Add />}
-            <span className="text-white"> Create Booking</span>{" "}
-            {loading && <Spinner animation="grow" size="sm" variant="default" />}
-          </Button>
         </Col>
       </Row>
       {showModal && <NewBooking toggleShowModal={toggleShowModal} showModal={showModal} />}

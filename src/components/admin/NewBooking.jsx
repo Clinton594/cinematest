@@ -17,6 +17,7 @@ export default function NewBooking({ toggleShowModal, showModal }) {
     show_time: "",
     show_date: "",
     movie_id: "",
+    price: "",
   });
   const [theatres, updateTheatres] = useState([]);
   const loading = shows.loading;
@@ -63,7 +64,7 @@ export default function NewBooking({ toggleShowModal, showModal }) {
             <div className="modal-body">
               <Form>
                 <Row>
-                  <Col md={12}>
+                  <Col md={6}>
                     <label>
                       <small>Choose Location</small>
                     </label>
@@ -100,6 +101,17 @@ export default function NewBooking({ toggleShowModal, showModal }) {
                       onChange={updateField}
                       required
                       isDisabled={loading}
+                    />
+                  </Col>
+                  <Col md={6}>
+                    <FormElement
+                      disabled={loading}
+                      onChange={updateField}
+                      value={event.price}
+                      label="Show Price"
+                      name="price"
+                      type="number"
+                      required
                     />
                   </Col>
                   <Col md={6}>
