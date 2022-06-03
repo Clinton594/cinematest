@@ -122,7 +122,6 @@ const showSlice = createSlice({
       if (payload.status) {
         const { data } = payload;
         let bookings = state.bookings;
-        console.log(payload);
         if (payload.edited) {
           state.bookings = current(bookings).map((x) => {
             if (x.id === data.id) {

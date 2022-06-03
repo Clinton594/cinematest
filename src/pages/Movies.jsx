@@ -49,10 +49,11 @@ export default function Home() {
     dispatch(getShows(encode(formdata)));
     //
   };
+
   useEffect(() => {
-    dispatch(getShows());
+    dispatch(getShows(window.location.search.replace("?", "")));
     setTimeout(() => {
-      dispatch(getShows());
+      dispatch(getShows(window.location.search.replace("?", "")));
     }, 100000);
   }, [dispatch]);
 
@@ -122,7 +123,9 @@ export default function Home() {
               columns={tabledata.booked}
               data={booked}
               expandableRows
+              progressPending={loading}
               expandableRowsComponent={ExpandedComponent}
+              progressComponent={<Spinner animation="grow" size="md" variant="danger" />}
             />
           </Col>
         </Row>
