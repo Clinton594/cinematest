@@ -1,0 +1,87 @@
+@media (max-width: 580px) {
+  .rocket-lazyload::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #01070d96;
+  }
+  .row.section.locations {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  div.row.blurb {
+    padding-top: unset;
+  }
+  .navbar-brand > img {
+    width: 150px;
+  }
+  nav.navbar.navbar-expand-lg.w-100 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  .navbar-toggler {
+    background-color: #c01589;
+  }
+  .banner-title {
+    height: 110px;
+  }
+  div.page-content {
+    padding-top: 0px;
+  }
+  ul.css-1ta9ch5 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-left: 0;
+    padding-left: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  header.navbar {
+    position: -webkit-relative;
+    position: relative;
+  }
+  .login-containter {
+    height: 70vh;
+  }
+  div.page-content {
+    padding-top: 0px;
+  }
+  ul.css-1ta9ch5 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-left: 0;
+    padding-left: 0;
+  }
+  .navbar-brand > img {
+    width: 180px;
+  }
+}
+@media screen and (min-width: 769px) {
+  header.navbar {
+    position: fixed;
+    position: -webkit-fixed;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+  .login-containter {
+    height: 100vh;
+  }
+  .banner-title {
+    height: 200px;
+    display: flex;
+    align-items: flex-end;
+  }
+  .navbar-brand > img {
+    width: 250px;
+  }
+}
