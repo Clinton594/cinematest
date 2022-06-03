@@ -56,10 +56,19 @@ class Shows extends Auth
     return $response;
   }
 
-  function listShows()
+  function listShows($_filters)
   {
+    $filters = object(array_map("strtolower", $_filters));
     $db = $this::$db;
     $response = object(["status" => true]);
+
+    $sort =  "ORDER BY m.id DESC";
+    $filter = "";
+
+    if (!empty($filters->sort)) $sort = "ORDER BY m.{$filters->sort} ASC";
+    if (!empty($filters->filter)) {
+      $filter = "WHERE " . $db->filterQuery(str_replace("~", "=", $filters->filter));
+    }
 
     $bookin = $db->select("booking");
 
@@ -67,8 +76,10 @@ class Shows extends Auth
     FROM movie AS m
     INNER JOIN booking AS b
     ON m.id = b.movie_id
+    {$filter}
     GROUP BY b.movie_id
-    ORDER BY m.id DESC";
+    {$sort}
+    ";
     $movies = $db->query($sql);
 
     $response->data = array_map(function ($movie) use ($bookin) {
@@ -76,6 +87,7 @@ class Shows extends Auth
       $booked = array_map(function ($x) {
         $bdate = new DateTime("{$x->show_date} {$x->show_time}");
         $x->date = $bdate->format("Y-m-d h:ia");
+        $x->price = "$" . $x->price;
         return $x;
       }, array_filter($bookin, function ($booked) use ($movie) {
         return $booked->movie_id === $movie->id;

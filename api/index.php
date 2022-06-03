@@ -48,7 +48,7 @@ switch ($api->route) {
     break;
   case 'shows':
     $movie = new Shows($Database);
-    $response = $movie->listShows();
+    $response = $movie->listShows($_GET);
     break;
   default:
     $response->status = false;

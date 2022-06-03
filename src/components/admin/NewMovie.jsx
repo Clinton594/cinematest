@@ -89,8 +89,7 @@ export default function NewMovie({ toggleShowModal, showModal }) {
                     </label>
                     <Select
                       name="language"
-                      isMulti
-                      defaultValue={movie.language.split(",")}
+                      defaultValue={movie.language}
                       options={metadata.languages.map((x) => ({ label: x, value: x }))}
                       onChange={updateField}
                       required

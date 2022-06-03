@@ -35,7 +35,7 @@ export default function Home() {
               {locations.length > 0 &&
                 locations.map((location) => (
                   <div key={location.name} className="col d-flex justify-content-center">
-                    <Link to={`/movies/${location.name.toLowerCase()}`}>
+                    <Link to={`/movies/?location=${location.name.toLowerCase()}`}>
                       <Location event={location} />
                     </Link>
                   </div>

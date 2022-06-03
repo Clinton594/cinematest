@@ -35,8 +35,9 @@ export const deleteBooking = createAsyncThunk("show/deleteBooking", async (data)
   return await $.post(`${route.api}delete-booking`, data);
 });
 
-export const getShows = createAsyncThunk("show/getShows", async () => {
-  return await $.get(`${route.api}shows`);
+export const getShows = createAsyncThunk("show/getShows", async (uri) => {
+  uri = uri !== undefined ? `?${uri}` : "";
+  return await $.get(`${route.api}shows${uri.toLowerCase()}`);
 });
 
 const showSlice = createSlice({

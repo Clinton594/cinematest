@@ -138,4 +138,52 @@ class Database extends Server
 
     return $response;
   }
+
+  public function filterQuery($filter)
+  {
+    $search = "";
+    $clause = $filter;
+
+    $filter = str_replace("&", ",", $filter);
+    $filter = str_replace(" AND ", " and ", $filter);
+    $filter = str_replace(" and ", ",", $filter);
+
+    if (!empty($filter)) {
+      $_flt = $filters = [];
+      $arr = explode(',', $filter);
+      // Supported symbols for filtering
+      $explosives = ["<>", "!=", "<", ">", "="];
+      $position = 0;
+      foreach ($arr as $fltr) {
+        $explode_key = "=";
+        foreach ($explosives as $xk => $xv) {
+          if (gettype(stripos($fltr, $xv)) !== 'boolean') {
+            $explode_key = $xv;
+            break;
+          }
+        }
+        if (gettype(stripos($fltr, $explode_key)) !== 'boolean') { //if contains an explosive
+          $_a = explode($explode_key, str_replace("'", "", $fltr));
+          $_a = array_map("trim", $_a);
+          $_a[0] = cleanUp(trim($_a[0]));
+          if (strtolower($_a[1]) == "null") {
+            $_flt[$_a[0]][] = "{$_a[0]} IS NULL";
+          } else {
+            $_flt[$_a[0]][] = "{$_a[0]}$explode_key'{$_a[1]}'";
+          }
+        } else if (gettype(stripos($fltr, ' in ')) !== 'boolean') {
+          // see(get_in_clause($clause, $position));
+          $filters[] = get_in_clause($clause, $position);
+          $position++;
+        }
+      }
+      foreach ($_flt as $values) {
+        $filters[] = count($values) > 1 ? "(" . implode(" OR ", $values) . ")" : $values[0];
+      }
+      $filters = implode(" AND ", $filters);
+      $filter = !empty($filters) && !empty($search) ? "{$filters} AND {$search}" : $filters . $search;
+    }
+
+    return ($filter);
+  }
 }

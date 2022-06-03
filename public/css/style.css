@@ -264,7 +264,8 @@ aside > ul > li > div > span {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.card * {
+.card *,
+.movies-filter {
   color: rgba(76, 78, 100, 0.87);
 }
 .card {
@@ -419,17 +420,37 @@ aside > ul > li > div > span {
 .navbar-toggler {
   background-color: #e68720 !important;
 }
+input[type="input"],
+input[type="number"],
 input[type="time"],
 input[type="date"] {
   height: 48px;
   flex-direction: row;
 }
-.css-26l3qy-menu *,
-.css-qc6sy-singleValue,
-.css-14el2xx-placeholder,
+.dashboard .css-26l3qy-menu *,
+.dashboard .css-qc6sy-singleValue,
+.dashboard .css-14el2xx-placeholder,
 label small {
-  font-size: 0.7em !important;
+  font-size: 15px !important;
   font-weight: 400;
+}
+
+.movies-filter .css-12jo7m5 {
+  border-radius: 2px;
+  color: hsl(0, 0%, 20%);
+  overflow: hidden;
+  padding: 3px;
+  padding-left: 6px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+  height: 24px;
+  font-size: small;
+}
+.movies-filter .css-26l3qy-menu *,
+.movies-filter .css-qc6sy-singleValue,
+.movies-filter .css-14el2xx-placeholder {
+  font-size: 15px !important;
 }
 .idPHNo.rdt_TableHead {
   font-size: 0.6em;
@@ -542,4 +563,10 @@ label small {
 .nav-pills .show > .nav-link {
   color: #fff;
   background-color: #c01589 !important;
+}
+.css-13nd69s:hover {
+  background-color: #c01589;
+}
+.css-13nd69s:hover .css-p5l70t {
+  color: white;
 }

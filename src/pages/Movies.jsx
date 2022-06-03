@@ -1,3 +1,4 @@
+import Select from "react-select";
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,14 +8,47 @@ import Navbar from "../components/Navbar";
 import { getShows } from "../redux/reducers/shows";
 import tabledata from "../constants/tableFormats";
 import Section from "../components/Section";
-import { Col, Content, Row } from "../components/Elements";
+import { Button, Col, Content, Form, Row } from "../components/Elements";
+import Spinner from "../components/Spinner";
 
 export default function Home() {
+  const [formdata, setformdata] = useState({ filter: "", sort: "" });
   const dispatch = useDispatch();
   const {
-    shows: { booked },
+    metadata,
+    shows: { booked, loading },
   } = useSelector((store) => store);
 
+  const filterData = () => {
+    const sortData = {
+      location: metadata.locations.map((x) => x.name),
+      language: metadata.languages,
+      genre: metadata.genre,
+    };
+
+    const build = [];
+    for (const index in sortData) {
+      build.push({
+        label: index.toLowerCase(),
+        options: sortData[index].map((x) => ({ label: x, value: `${index}~${x}` })),
+      });
+    }
+    return build;
+  };
+
+  const updateField = (x, y) => {
+    setformdata({ ...formdata, [y.name]: x.length === undefined ? x.value : x.map((t) => t.value).join() });
+  };
+  const encode = (obj) => {
+    return Object.entries(obj)
+      .map(([k, v]) => `${k}=${encodeURIComponent(v)}`)
+      .join("&");
+  };
+  const filterRows = (e) => {
+    e.preventDefault();
+    dispatch(getShows(encode(formdata)));
+    //
+  };
   useEffect(() => {
     dispatch(getShows());
     setTimeout(() => {
@@ -38,7 +72,48 @@ export default function Home() {
       </div>
       <Section className="container">
         <Row>
-          <Col>Header</Col>
+          <Col md={12}>
+            <Form onSubmit={filterRows}>
+              <Content className="movies-filter">
+                <Row>
+                  <Col md={5}>
+                    <label htmlFor="filter">
+                      <small>Filter Options</small>
+                    </label>
+                    <Select
+                      placeholder="Select Multiple"
+                      name="filter"
+                      isMulti
+                      options={filterData()}
+                      onChange={updateField}
+                      required
+                      isDisabled={loading}
+                    />
+                  </Col>
+                  <Col md={5}>
+                    <label htmlFor="sort">
+                      <small>Sort Options</small>
+                    </label>
+                    <Select
+                      name="sort"
+                      options={[
+                        { label: "Language", value: "language" },
+                        { label: "Title", value: "title" },
+                      ]}
+                      onChange={updateField}
+                      required
+                      isDisabled={loading}
+                    />
+                  </Col>
+                  <Col md={2} className="d-flex align-items-end">
+                    <Button disabled={loading} type="submit" variant="danger">
+                      Apply {loading && <Spinner variant="info" size="sm" animation="grow" />}
+                    </Button>
+                  </Col>
+                </Row>
+              </Content>
+            </Form>
+          </Col>
         </Row>
         <Row>
           <Col md="12">
@@ -76,7 +151,7 @@ const ExpandedComponent = ({ data }) => {
                   key={location}
                   onClick={() => switchTo(location)}
                   className={`nav-item nav-link ${location === active ? "active" : ""}`}
-                  href="javascript:;"
+                  href="#!"
                 >
                   {location.toUpperCase()}
                 </a>
