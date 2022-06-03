@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Spinner from "../Spinner";
-import { createMovie } from "../../redux/reducers/shows";
+import { createMovie, resetToast } from "../../redux/reducers/shows";
 import { Form, FormElement, Row, Col } from "../Elements";
 import { setToast } from "../../redux/reducers/toast";
 
@@ -19,6 +19,12 @@ export default function NewMovie({ toggleShowModal, showModal }) {
       toggleSwipe((showModal && "show") || "");
     }, 100);
   }, [showModal]);
+
+  useEffect(() => {
+    if (shows.edit !== false && shows.edit.section === "Movie") {
+      updateMovie(shows.edit);
+    }
+  }, [shows.edit]);
 
   const updateField = (e, f) => {
     !f && updateMovie({ ...movie, [e.target.name]: e.target.value });
@@ -41,6 +47,7 @@ export default function NewMovie({ toggleShowModal, showModal }) {
       <div
         onClick={() => {
           toggleShowModal(!showModal);
+          dispatch(resetToast());
         }}
         className="fade modal-backdrop show"
       ></div>
@@ -76,7 +83,8 @@ export default function NewMovie({ toggleShowModal, showModal }) {
                     </label>
                     <Select
                       name="genre"
-                      defaultValue={movie.genre}
+                      defaultValue={{ label: movie.genre, value: movie.genre }}
+                      value={{ label: movie.genre, value: movie.genre }}
                       options={metadata.genre.map((x) => ({ label: x, value: x }))}
                       onChange={updateField}
                       required
@@ -89,7 +97,8 @@ export default function NewMovie({ toggleShowModal, showModal }) {
                     </label>
                     <Select
                       name="language"
-                      defaultValue={movie.language}
+                      defaultValue={{ label: movie.language, value: movie.language }}
+                      value={{ label: movie.language, value: movie.language }}
                       options={metadata.languages.map((x) => ({ label: x, value: x }))}
                       onChange={updateField}
                       required

@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Add from "../Icons/Add";
 import Spinner from "../Spinner";
 import NewBooking from "./NewBooking";
-import { getBookings } from "../../redux/reducers/shows";
-import { Col, Row, Content, Button } from "../Elements";
-import { setToast } from "../../redux/reducers/toast";
+import Booking from "../Icons/Booking";
+import { Col, Row, Content } from "../Elements";
 import tabledata from "../../constants/tableFormats";
+import { setToast } from "../../redux/reducers/toast";
+import { getBookings, resetToast } from "../../redux/reducers/shows";
 
 export default function TabBookings() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export default function TabBookings() {
     if (toast === true && !loading) {
       toggleShowModal(false);
       dispatch(setToast({ show: true, status: true, message: "Successful", title: "New Booking" }));
+      dispatch(resetToast());
     }
   }, [toast, loading]);
 
@@ -31,7 +33,9 @@ export default function TabBookings() {
   return (
     <Content id="id">
       <h5 className="d-flex justify-content-between w-100 align-item-center">
-        <span>Booked Movie Shows</span>
+        <span>
+          <Booking /> Booked Movie Shows
+        </span>
         <button
           disabled={loading}
           className="btn-success btn"

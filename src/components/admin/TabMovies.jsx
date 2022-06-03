@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Add from "../Icons/Add";
 import Spinner from "../Spinner";
 import NewMovie from "./NewMovie";
-import { getMovies } from "../../redux/reducers/shows";
+import { editSlice, getMovies } from "../../redux/reducers/shows";
 import { Col, Row, Content, Button } from "../Elements";
 import tabledata from "../../constants/tableFormats";
+import Movie from "../Icons/Video";
 
 export default function TabMovies() {
   const dispatch = useDispatch();
@@ -22,10 +23,17 @@ export default function TabMovies() {
     toast === true && !loading && toggleShowModal(false);
   }, [toast, loading]);
 
+  const editRow = (row) => {
+    toggleShowModal(true);
+    const copy = { ...row, section: "Movie" };
+    dispatch(editSlice(copy));
+  };
   return (
     <Content id="id">
       <h5 className="d-flex justify-content-between align-items-center">
-        <span>Showing a list of uploaded Movies</span>
+        <span>
+          <Movie /> Showing a list of uploaded Movies
+        </span>
         <button
           disabled={loading}
           className="btn-warning btn"
@@ -43,7 +51,14 @@ export default function TabMovies() {
       </Row>
       <Row>
         <Col md={12}>
-          <DataTable columns={tabledata.movies} data={movies} selectableRows pagination />
+          <DataTable
+            onRowClicked={editRow}
+            persistTableHead={true}
+            columns={tabledata.movies}
+            data={movies}
+            selectableRows
+            pagination
+          />
         </Col>
       </Row>
       {showModal && <NewMovie toggleShowModal={toggleShowModal} showModal={showModal} />}

@@ -66,7 +66,7 @@ class Shows extends Auth
     $filter = "";
     list("data" => $data) = $db->getMetadata();
     $locations = array_map(function ($x) {
-      return $x->name;
+      return strtolower($x->name);
     }, $data->locations);
 
     if (!empty($filters->sort)) $sort = "ORDER BY m.{$filters->sort} ASC";
@@ -82,6 +82,8 @@ class Shows extends Auth
       }));
       if (count($_loc)) $locations = $_loc;
     }
+
+
 
     $bookin = $db->select("booking");
 
@@ -121,7 +123,7 @@ class Shows extends Auth
     $response = object(["status" => false]);
     if ($this->authenticateUser()) {
       $data =  $db->select("movie", "title={$movie_data->title}");
-      if (!count($data)) {
+      if (!count($data) || !empty($movie_data->id)) {
         $response =  $db->insert("movie", $movie_data);
       } else  $response->message = "DATA_EXISTS";
     } else $response->message = "UNAUTHORIZED_ACCESS";

@@ -118,6 +118,7 @@ export default function Home() {
         <Row>
           <Col md="12">
             <DataTable
+              title="Movie Shows"
               columns={tabledata.booked}
               data={booked}
               expandableRows

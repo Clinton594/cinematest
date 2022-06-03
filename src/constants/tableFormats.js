@@ -1,25 +1,36 @@
+import Cell from "../components/admin/ComponentEdit";
+
 const tabledata = {
   movies: [
     {
       name: "Title",
       selector: (row) => row.title,
       sortable: true,
+      ignoreRowClick: true,
     },
     {
       name: "Cast",
       selector: (row) => row.cast,
+      ignoreRowClick: true,
     },
     {
       name: "Language",
       selector: (row) => row.language,
+      ignoreRowClick: true,
     },
     {
       name: "Genre",
       selector: (row) => row.genre,
+      ignoreRowClick: true,
     },
     {
       name: "Date Created",
       selector: (row) => row.date,
+      ignoreRowClick: true,
+    },
+    {
+      name: "",
+      cell: Cell,
     },
   ],
   bookings: [
@@ -47,6 +58,10 @@ const tabledata = {
     {
       name: "Date Created",
       selector: (row) => row.date,
+    },
+    {
+      name: "",
+      cell: Cell,
     },
   ],
   booked: [

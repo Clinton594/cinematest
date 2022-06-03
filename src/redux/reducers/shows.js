@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import defaultShows from "../../constants/defaultShow";
 import route from "../../constants/routes";
 
@@ -9,10 +9,6 @@ export const getMovies = createAsyncThunk("show/getMovies", async () => {
 
 export const createMovie = createAsyncThunk("show/createMovie", async (data) => {
   return await $.post(`${route.api}create-movie`, data);
-});
-
-export const updateMovie = createAsyncThunk("show/updateMovie", async (data) => {
-  return await $.post(`${route.api}update-movie`, data);
 });
 
 export const deleteMovie = createAsyncThunk("show/deleteMovie", async (data) => {
@@ -25,10 +21,6 @@ export const getBookings = createAsyncThunk("show/getBookings", async () => {
 
 export const createBooking = createAsyncThunk("show/createBooking", async (data) => {
   return await $.post(`${route.api}create-booking`, data);
-});
-
-export const updateBooking = createAsyncThunk("show/updateBooking", async (data) => {
-  return await $.post(`${route.api}update-booking`, data);
 });
 
 export const deleteBooking = createAsyncThunk("show/deleteBooking", async (data) => {
@@ -46,6 +38,10 @@ const showSlice = createSlice({
   reducers: {
     resetToast: (state) => {
       state.toast = { trigger: false };
+      state.edit = false;
+    },
+    editSlice: (state, { payload }) => {
+      state.edit = payload;
     },
   },
   extraReducers: {
@@ -73,20 +69,24 @@ const showSlice = createSlice({
     [createMovie.fulfilled]: (state, { payload }) => {
       state.loading = false;
       if (payload.status) {
+        const { data } = payload;
         let movies = state.movies;
-        movies.push(payload.data);
+        if (payload.edited) {
+          state.movies = current(movies).map((x) => {
+            if (x.id === data.id) {
+              x = data;
+            }
+            return x;
+          });
+        } else {
+          movies.push(data);
+        }
         state.toast = true;
       } else {
         state.toast = { ...payload, trigger: true };
       }
     },
-    // Update movie
-    [updateMovie.pending]: (state) => {
-      state.loading = true;
-    },
-    [updateMovie.fulfilled]: (state, { payload }) => {
-      state.loading = false;
-    },
+
     // Delete Movie
     [deleteMovie.pending]: (state) => {
       state.loading = true;
@@ -127,16 +127,6 @@ const showSlice = createSlice({
         state.toast = { ...payload, trigger: true };
       }
     },
-    // Update Booking
-    [updateBooking.pending]: (state) => {
-      state.loading = true;
-    },
-    [updateBooking.rejected]: (state) => {
-      state.loading = false;
-    },
-    [updateBooking.fulfilled]: (state, { payload }) => {
-      state.loading = false;
-    },
     // Delete Booking
     [deleteBooking.pending]: (state) => {
       state.loading = true;
@@ -165,4 +155,4 @@ const showSlice = createSlice({
 });
 
 export default showSlice.reducer;
-export const { resetToast } = showSlice.actions;
+export const { resetToast, editSlice } = showSlice.actions;

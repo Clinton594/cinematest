@@ -133,7 +133,10 @@ class Database extends Server
     $query = $db->query($sql);
     if ($query) {
       $response->status = true;
-      $response->data = object(array_merge(arrray($data), ["id" => $db->insert_id, "date" => date("Y-m-d H:i:s")]));
+      if (!empty($data->id)) {
+        $response->edited = true;
+      }
+      $response->data = object(array_merge(arrray($data), ["id" => empty($db->insert_id) ? $data->id : $db->insert_id, "date" => date("Y-m-d H:i:s")]));
     } else $response->message = $db->error;
 
     return $response;
