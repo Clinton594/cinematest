@@ -26,7 +26,7 @@ export default function TabBookings() {
       dispatch(setToast({ show: true, status: true, message: "Successful", title: "New Booking" }));
       dispatch(resetToast());
     }
-  }, [toast, loading]);
+  }, [toast, loading, dispatch]);
 
   const handleChange = (data) => {};
   const editRow = (row) => {

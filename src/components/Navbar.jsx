@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Logout from "./Icons/Logout";
 import route from "../constants/routes";
-import { Button } from "../components/Elements";
 import { logoutUser } from "../redux/reducers/user";
 import { getMetadata } from "../redux/reducers/metadata";
 import Menu from "./Icons/Menu";

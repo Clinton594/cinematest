@@ -6,7 +6,7 @@ import Add from "../Icons/Add";
 import Spinner from "../Spinner";
 import NewMovie from "./NewMovie";
 import { editSlice, getMovies } from "../../redux/reducers/shows";
-import { Col, Row, Content, Button } from "../Elements";
+import { Col, Row, Content } from "../Elements";
 import tabledata from "../../constants/tableFormats";
 import Movie from "../Icons/Video";
 
