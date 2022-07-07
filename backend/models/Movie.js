@@ -1,4 +1,4 @@
-const mongoose = import("mongoose");
+import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
@@ -33,4 +33,4 @@ const MovieSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("Movie", MovieSchema);
+export default mongoose.model("Movie", MovieSchema);

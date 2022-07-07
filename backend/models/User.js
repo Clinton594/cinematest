@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
@@ -41,4 +42,9 @@ const UserSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("User", UserSchema);
+UserSchema.methods.hashPassword = function () {};
+UserSchema.methods.comparePassword = function () {};
+UserSchema.pre("save", function () {});
+
+const UserModel = mongoose.model("User", UserSchema);
+export default UserModel;
