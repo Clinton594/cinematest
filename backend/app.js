@@ -8,6 +8,7 @@ import UserRouter from "./routes/User.js";
 
 // MiddleWares
 import Errors from "./middlewares/Errors.js";
+import "./services/cache.js";
 
 dotenv.config();
 
@@ -30,5 +31,6 @@ app.use("/auth", UserRouter);
 app.use(Errors);
 
 app.listen(process.env.PORT, (res) => {
+  console.clear();
   console.log(`Server start on port: ${process.env.PORT}`);
 });
